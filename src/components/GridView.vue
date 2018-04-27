@@ -39,7 +39,6 @@
 
 <script>
 
-import html2canvas from 'html2canvas';
 import dom2image from 'dom-to-image'
 
 export default {
@@ -52,7 +51,7 @@ export default {
   },
   methods: {
     capture () {
-      dom2image.toJpeg(document.getElementById('container')).then( (dataUrl) => {
+      dom2image.toJpeg(this.$refs.container, {}).then( (dataUrl) => {
         // var img = new Image();
         // img.src = dataUrl;
         this.$refs.canvasImg.src = dataUrl;
