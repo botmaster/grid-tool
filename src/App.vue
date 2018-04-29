@@ -27,13 +27,21 @@
 
         <div class="iframe-wrapper">
             <resizer
-                :x="40"
-                :grid="[10,10]">
-                <div class="dummy"/>
+                :w="400"
+                :minw="100">
+                <iframe
+                    id="Example2"
+                    name="Example2"
+                    title="Example2"
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    scrolling="yes"
+                    marginheight="0"
+                    marginwidth="0"
+                    src="grid.html"/>
             </resizer>
         </div>
-
-
 
 
     </div>
@@ -79,8 +87,6 @@ export default {
     *::after {
         box-sizing: inherit;
     }
-
-
 
     .iframe-wrapper {
         flex: 1;
