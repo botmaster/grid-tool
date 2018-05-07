@@ -14,6 +14,9 @@
             :class="'handle-' + handle"
             @mousedown.stop.prevent="handleDown(handle, $event)"
         />
+        <div class="info">
+            <span class="info__width">{{ style.width }}</span>
+        </div>
         <slot/>
     </div>
 </template>
@@ -179,7 +182,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+    $handelWidth: 50px;
+
     .vdr {
         position: relative;
         box-sizing: border-box;
@@ -187,16 +193,30 @@ export default {
 
     .handle {
         position: absolute;
-        width: 30px;
+        width: $handelWidth;
         background: #EEE;
     }
 
     .handle-mr {
         top: 0;
         bottom: 0;
-        right: -30px;
+        right: -$handelWidth;
         cursor: e-resize;
-        background-color: deepskyblue;
+        background-color: #002e3c;
+    }
+
+    .info {
+        position: absolute;
+        top: -24px;
+        left: 0;
+        right: 0;
+        height: 24px;
+        display: flex;
+        justify-content: flex-end;
+
+        &__width {
+
+        }
     }
 
 </style>

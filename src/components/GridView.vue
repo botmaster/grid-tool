@@ -1,6 +1,6 @@
 <template>
     <div class="grid-view">
-        <div class="container">
+        <!--<div class="container">
             <div>
                 <label for="inputContainerWith">Largeur max du container</label>
                 <input
@@ -17,7 +17,7 @@
                     id="inputColNum">
             </div>
             <div>
-                <label for="inputColNum">Largeur goutière</label>
+                <label for="inputGutterWidth">Largeur goutière</label>
                 <input
                     v-model.number="gutterWidth"
                     type="number"
@@ -27,15 +27,15 @@
             <button
                 class="btn btn-primary"
                 @click="containerWidth = 'auto'">auto</button>
-        </div>
+        </div>-->
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col">
-                    <h3>Custom grid</h3>
-                </div>
-            </div>
-        </div>
+        <!-- <div class="container mt-5">
+             <div class="row">
+                 <div class="col">
+                     <h3>Custom grid</h3>
+                 </div>
+             </div>
+         </div>-->
 
         <div class="dom-wrap">
             <div
@@ -54,7 +54,12 @@
             </div>
         </div>
 
-        <div class="container mt-5">
+        <!--<button
+            class="btn btn-secondary"
+            @click="capture('containerCustom')">capturer
+        </button>-->
+
+        <!--<div class="container mt-5">
             <div class="row">
                 <div class="col">
                     <button
@@ -62,10 +67,10 @@
                         @click="capture('containerCustom')">capturer</button>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
-        <div class="container mt-5">
+        <!--<div class="container mt-5">
             <div class="row">
                 <div class="col">
                     <h3>Boostrap grid</h3>
@@ -97,16 +102,15 @@
                         @click="capture('containerBs')">capturer</button>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
-
-        <div class="text-center mt-5">
+        <!--<div class="text-center mt-5">
             <img
                 ref="canvasImg"
                 id="canvasImg"
                 alt="Right click to save me!">
-        </div>
+        </div>-->
 
         <!--<img src="../assets/logo.png">-->
 
@@ -137,17 +141,32 @@ export default {
         }
     },
     computed: {
+
+
         colWidth: function () {
             let colWidth = this.containerWidth / this.columnsNum;
             return colWidth / this.containerWidth * 100 + '%';
         },
 
-        isAutoClass () {
+        isAutoClass() {
             return {
                 'container-fluid': this.containerWidth === 'auto',
                 'container': Number(this.containerWidth)
             }
         }
+    },
+    created () {
+        //console.log(this.$store.state.gridModule.colCount);
+
+        this.$bus.$on('colCountChange', (e)=> {
+            console.log('colCountChange', e);
+            this.columnsNum = e;
+        });
+        this.$bus.$on('gutterWidthChange', (e)=> {
+            console.log('gutterWidthChange', e);
+            this.gutterWidth = e;
+        });
+
     }
 };
 </script>
@@ -193,7 +212,6 @@ export default {
             background-image: linear-gradient(#f7dddd);
             background-clip: content-box;
         }
-
 
         .dom-wrap {
             display: flex;

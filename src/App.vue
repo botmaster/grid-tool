@@ -1,36 +1,14 @@
 <template>
     <div id="app">
-
-        <!--<GridView/>-->
-        <!--<editor/>-->
-        <!--<div class="iframe-wrapper">
-            <vue-draggable-resizable
-                :draggable="false"
-                :handles="['mr', 'ml']"
-                :parent="true"
-                drag-handle=".drag">
-                <p>Hello! I'm a flexible component. You can drag me around and you can resize me.<br></p>
-                <div class="drag">Handle</div>
+        <div id="app__header">
+            <header-component/>
+        </div>
+        <main id="app__main">
+            <div class="iframe-wrapper">
+                <resizer-rewamp @resize="onResize"/>
                 <iframe
-                    id="Example2"
-                    name="Example2"
-                    title="Example2"
-                    width="100%"
-                    height="100%"
-                    frameborder="0"
-                    scrolling="no"
-                    marginheight="0"
-                    marginwidth="0"
-                    src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=es-419&amp;geocode=&amp;q=buenos+aires&amp;sll=37.0625,-95.677068&amp;sspn=38.638819,80.859375&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Buenos+Aires,+Argentina&amp;z=11&amp;ll=-34.603723,-58.381593&amp;output=embed"/>
-            </vue-draggable-resizable>
-        </div>-->
-
-        <div class="iframe-wrapper">
-            <resizer
-                :w="400"
-                :minw="100">
-                <iframe
-                    id="Example2"
+                    ref="iframe"
+                    id="iframe"
                     name="Example2"
                     title="Example2"
                     width="100%"
@@ -40,60 +18,82 @@
                     marginheight="0"
                     marginwidth="0"
                     src="grid.html"/>
-            </resizer>
-        </div>
+                    <!--<div class="dummy"/>-->
+            </div>
+        </main>
+
+        <footer id="app__footer">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda beatae cum debitis eligendi, eveniet illo illum laboriosam minus molestiae nostrum porro, qui quidem rem repudiandae sequi totam velit voluptatem!
+        </footer>
+
+
 
 
     </div>
 </template>
 
 <script>
-import GridView from './components/GridView'
-import Editor from './components/Editor'
-import Resizer from './components/Resizer'
+import HeaderComponent from './components/HeaderComponent';
+import ResizerRewamp from './components/ResizerRewamp';
 
 export default {
     name: 'App',
     components: {
-        GridView,
-        Editor,
-        Resizer
-    }
+        ResizerRewamp,
+        HeaderComponent
+    },
+    methods: {
+        onResize() {
+            //console.log(e);
+            /*this.$refs.iframe.width = e.size.width;
+            this.$refs.iframe.height = e.size.height;*/
+        },
+        onClick() {
+            document.getElementById('iframe').contentWindow.alert('tutu');
+        }
+    },
 }
 </script>
 
-<style>
+<style scoped lang="scss">
     #app {
-        /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
 
         display: flex;
+        flex-direction: column;
         min-height: 100vh;
+        position: relative;
+
+        &__header {
+
+        }
+
+        &__main {
+            background-color: #eeeeee;
+            flex: 1;
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__footer {
+            background-color: black;
+            height: 200px;
+        }
     }
 
-    html, body {
-        padding: 0;
-        margin: 0;
-    }
 
-    html {
-        box-sizing: border-box;
-        -ms-overflow-style: scrollbar;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: inherit;
-    }
 
     .iframe-wrapper {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: relative;
         background-color: red;
+        width: 1140px;
+        height: 500px;
+    }
+
+    #iframe {
+        pointer-events: none;
     }
 
     .dummy {
@@ -101,5 +101,7 @@ export default {
         height: 100%;
         background-color: aquamarine;
     }
+
+
 
 </style>
