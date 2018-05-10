@@ -64,6 +64,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             inject: true,
             chunks: ['grid']
         }),
+        new HtmlWebpackPlugin({
+            filename: 'grid-bootstrap.html',
+            template: 'grid-bootstrap.html',
+            inject: true,
+            chunks: ['gridBootstrap']
+        }),
         // copy custom static assets
         new CopyWebpackPlugin([
             {

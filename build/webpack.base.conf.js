@@ -24,7 +24,8 @@ module.exports = {
     context: path.resolve(__dirname, '../'),
     entry: {
         app: './src/main.js',
-        grid: './src/main-grid.js'
+        grid: './src/main-grid.js',
+        gridBootstrap: './src/main-grid-bootstrap.js'
     },
     output: {
         path: config.build.assetsRoot,

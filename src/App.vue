@@ -4,6 +4,17 @@
             <header-component/>
         </div>
         <main id="app__main">
+            <div>
+                <select @change="changeIframeSrc">
+                    <option
+                        v-for="option in iframeList"
+                        :key="option.value"
+                        :value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+                <span>Selected: {{ selectedIframeSrc }}</span>
+            </div>
             <div class="iframe-wrapper">
                 <resizer-rewamp @resize="onResize"/>
                 <iframe
@@ -17,16 +28,15 @@
                     scrolling="yes"
                     marginheight="0"
                     marginwidth="0"
-                    src="grid.html"/>
-                    <!--<div class="dummy"/>-->
+                    :src="selectedIframeSrc"/><!--<div class="dummy"/>-->
             </div>
         </main>
 
         <footer id="app__footer">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda beatae cum debitis eligendi, eveniet illo illum laboriosam minus molestiae nostrum porro, qui quidem rem repudiandae sequi totam velit voluptatem!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda beatae cum debitis eligendi,
+            eveniet illo illum laboriosam minus molestiae nostrum porro, qui quidem rem repudiandae sequi totam velit
+            voluptatem!
         </footer>
-
-
 
 
     </div>
@@ -38,6 +48,10 @@ import ResizerRewamp from './components/ResizerRewamp';
 
 export default {
     name: 'App',
+    data() {
+        return {
+        }
+    },
     components: {
         ResizerRewamp,
         HeaderComponent
@@ -48,10 +62,26 @@ export default {
             /*this.$refs.iframe.width = e.size.width;
             this.$refs.iframe.height = e.size.height;*/
         },
-        onClick() {
-            document.getElementById('iframe').contentWindow.alert('tutu');
+        changeIframeSrc(e) {
+            /*console.log(e.target.value);
+            console.log(e.target.options[e.target.selectedIndex].text)*/
+            this.$store.dispatch('setCurrentIframeSrc', {
+                value: e.target.value,
+                text: e.target.options[e.target.selectedIndex].text
+            });
         }
     },
+    computed: {
+        iframeList() {
+            return this.$store.getters.getIframeSrcList;
+        },
+        selectedIframeSrc() {
+            return this.$store.getters.getCurrentIframeSrc;
+        }
+    },
+    created() {
+        this.$store.dispatch('setCurrentIframeSrc', this.$store.getters.getIframeSrcList[0]);
+    }
 }
 </script>
 
@@ -73,6 +103,7 @@ export default {
             position: relative;
 
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -82,8 +113,6 @@ export default {
             height: 200px;
         }
     }
-
-
 
     .iframe-wrapper {
         position: relative;
@@ -101,7 +130,6 @@ export default {
         height: 100%;
         background-color: aquamarine;
     }
-
 
 
 </style>

@@ -119,7 +119,6 @@
 
 <script>
 
-import dom2image from 'dom-to-image'
 
 export default {
     data() {
@@ -129,19 +128,11 @@ export default {
             gutterWidth: 30
         };
     },
-    methods: {
-        capture(target) {
-            dom2image.toJpeg(this.$refs[target], {}).then((dataUrl) => {
-                // var img = new Image();
-                // img.src = dataUrl;
-                this.$refs.canvasImg.src = dataUrl;
-            }).catch(function (error) {
-                console.error('oops, something went wrong!', error);
-            });
-        }
-    },
-    computed: {
 
+    methods: {
+    },
+
+    computed: {
 
         colWidth: function () {
             let colWidth = this.containerWidth / this.columnsNum;
@@ -155,6 +146,7 @@ export default {
             }
         }
     },
+
     created () {
         //console.log(this.$store.state.gridModule.colCount);
 
@@ -168,6 +160,7 @@ export default {
         });
 
     },
+
     beforeDestroy () {
         this.$bus.$off('colCountChange');
         this.$bus.$off('gutterWidthChange');

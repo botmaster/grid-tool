@@ -20,6 +20,4 @@ new Vue({
     template: '<App/>'
 });
 
-//setTimeout(()=> document.getElementById('iframe').contentWindow.setStore(store), 1000 );
-//setTimeout(()=> document.getElementById('iframe').contentWindow.setColCount(10), 1000 );
 
