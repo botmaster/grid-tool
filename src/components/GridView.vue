@@ -1,119 +1,19 @@
 <template>
     <div class="grid-view">
-        <!--<div class="container">
-            <div>
-                <label for="inputContainerWith">Largeur max du container</label>
-                <input
-                    v-model.number="containerWidth"
-                    name="inputContainerWith"
-                    id="inputContainerWith">
-            </div>
-            <div>
-                <label for="inputColNum">Nombre de colonnes</label>
-                <input
-                    v-model.number="columnsNum"
-                    type="number"
-                    name="inputColNum"
-                    id="inputColNum">
-            </div>
-            <div>
-                <label for="inputGutterWidth">Largeur goutière</label>
-                <input
-                    v-model.number="gutterWidth"
-                    type="number"
-                    name="inputGutterWidth"
-                    id="inputGutterWidth">
-            </div>
-            <button
-                class="btn btn-primary"
-                @click="containerWidth = 'auto'">auto</button>
-        </div>-->
-
-        <!-- <div class="container mt-5">
-             <div class="row">
-                 <div class="col">
-                     <h3>Custom grid</h3>
-                 </div>
-             </div>
-         </div>-->
-
-        <div class="dom-wrap">
-            <div
-                ref="containerCustom"
-                class="g-container"
-                :style="{ maxWidth: containerWidth !== 'auto' ? (containerWidth + 'px') : 'none' }">
-                <div class="g-row">
-                    <div
-                        v-for="(i, index) in Number(columnsNum)"
-                        :key="index"
-                        class="g-col"
-                        :style="{ flex: '0 0 ' + colWidth, paddingLeft: gutterWidth/2 + 'px', paddingRight: gutterWidth/2 + 'px'}">
-                        {{ i }}
-                    </div>
+        <div
+            class="g-container"
+            ref="containerCustom"
+            :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px') }">
+            <div class="g-row">
+                <div
+                    v-for="(i, index) in Number(columnsNum)"
+                    :key="index"
+                    class="g-col"
+                    :style="{ flex: '0 0 ' + colWidth, paddingLeft: padding, paddingRight: padding}">
+                    {{ i }}
                 </div>
             </div>
         </div>
-
-        <!--<button
-            class="btn btn-secondary"
-            @click="capture('containerCustom')">capturer
-        </button>-->
-
-        <!--<div class="container mt-5">
-            <div class="row">
-                <div class="col">
-                    <button
-                        class="btn btn-secondary"
-                        @click="capture('containerCustom')">capturer</button>
-                </div>
-            </div>
-        </div>-->
-
-
-        <!--<div class="container mt-5">
-            <div class="row">
-                <div class="col">
-                    <h3>Boostrap grid</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="dom-wrap">
-            <div
-                ref="containerBs"
-                class="high-light-container"
-                :class="isAutoClass">
-                <div class="row high-light-row">
-                    <div
-                        v-for="(i, index) in Number(columnsNum)"
-                        :key="index"
-                        class="col-1 high-light-col">
-                        {{ i }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col">
-                    <button
-                        class="btn btn-secondary"
-                        @click="capture('containerBs')">capturer</button>
-                </div>
-            </div>
-        </div>-->
-
-
-        <!--<div class="text-center mt-5">
-            <img
-                ref="canvasImg"
-                id="canvasImg"
-                alt="Right click to save me!">
-        </div>-->
-
-        <!--<img src="../assets/logo.png">-->
-
     </div>
 </template>
 
@@ -126,7 +26,8 @@ export default {
         return {
             containerWidth: 1140,
             columnsNum: 12,
-            gutterWidth: 30
+            gutterWidth: 30,
+            isFluid: false
         };
     },
     methods: {
@@ -141,34 +42,39 @@ export default {
         }
     },
     computed: {
-
-
         colWidth: function () {
             let colWidth = this.containerWidth / this.columnsNum;
             return colWidth / this.containerWidth * 100 + '%';
         },
-
-        isAutoClass() {
-            return {
-                'container-fluid': this.containerWidth === 'auto',
-                'container': Number(this.containerWidth)
-            }
+        padding: function () {
+            return this.gutterWidth / 2 + 'px';
+        },
+        paddingFluid: function () {
+            return (this.gutterWidth / this.containerWidth * 100)/2 + '%';
         }
     },
-    created () {
+    created() {
         //console.log(this.$store.state.gridModule.colCount);
 
-        this.$bus.$on('colCountChange', (e)=> {
+        this.$bus.$on('colCountChange', (e) => {
             console.log('colCountChange', e);
             this.columnsNum = e;
         });
-        this.$bus.$on('gutterWidthChange', (e)=> {
+        this.$bus.$on('gutterWidthChange', (e) => {
             console.log('gutterWidthChange', e);
             this.gutterWidth = e;
         });
+        this.$bus.$on('isFluidChange', (e) => {
+            console.log('isFluidChange', e);
+            this.isFluid = e;
+        });
+        this.$bus.$on('maxWidthChange', (e) => {
+            console.log('maxWidthChange', e);
+            this.containerWidth = e;
+        });
 
     },
-    beforeDestroy () {
+    beforeDestroy() {
         this.$bus.$off('colCountChange');
         this.$bus.$off('gutterWidthChange');
     }
@@ -176,21 +82,44 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
+
+    html, body {
+        height: 100%;
+        //background-color: black;
+    }
+
+    body {
+
+    }
+
     .grid-view {
+        height: 100%;
+        font-size: 10px;
+        justify-content: center;
+        position: relative;
+
         .g-container {
+            height: 100%;
+            margin: 0 auto;
             padding: 2px 0;
-            background-color: red;
+            background-color: #00ffff;
             // margin-right: auto;
             // margin-left: auto;
             //background-image: url("~@/assets/logo.png");
+
+            &--fluid {
+
+            }
         }
 
         .g-row {
-            background-color: #eeeeee;
+            position: relative;
+            height: 100%;
+            background-color: #FFFFFF   ;
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             margin: 0;
             text-align: center;
         }
@@ -199,9 +128,11 @@ export default {
             position: relative;
             width: 100%;
             min-height: 1px;
-            background-image: linear-gradient(#f7dddd);
+            background-image: linear-gradient(#00ffff42);
             background-clip: content-box;
-            height: 400px;
+            //height: 400px;
+            align-items: stretch;
+
         }
 
         .high-light-container {

@@ -2,20 +2,51 @@
     <header
         class="header">
         <div class="container">
-            <!--<button @click="onClick">test</button>-->
-            {{ colCount }}
             <div class="header__container">
                 <div class="header__item">
                     <label
-                        for="widthMax"
+                        for="gridType"
+                        class="label">Type de grille</label>
+                    <div class="control">
+                        <select
+                            id="gridType"
+                            class="select"
+                            @change="changeIframeSrc">
+                            <option
+                                v-for="option in iframeList"
+                                :key="option.value"
+                                :value="option.value">
+                                {{ option.text }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="header__item">
+                    <label
+                        for="maxWidth"
                         class="label">Largeur maximum</label>
                     <div class="control">
                         <input
-                            id="widthMax"
+                            id="maxWidth"
+                            v-model="maxWidth"
                             class="input"
                             type="number"
                             min="320"
-                            max="3000">
+                            max="3000"
+                            step="10">
+                    </div>
+
+                    <div class="header__item header__item--inline">
+                        <label
+                            for="isFluid"
+                            class="label">Fluide</label>
+                        <div class="control">
+                            <input
+                                v-model="isFluid"
+                                id="isFluid"
+                                type="checkbox"
+                                class="checkbox">
+                        </div>
                     </div>
                 </div>
                 <div class="header__item">
@@ -25,6 +56,7 @@
                     <div class="control">
                         <input
                             v-model.number="colCount"
+                            class="input"
                             id="colNumber"
                             type="number"
                             min="1"
@@ -39,11 +71,13 @@
                         <input
                             v-model.number="gutterWidth"
                             id="gutterWidth"
+                            class="input"
                             type="number"
                             min="0"
                             max="400">
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -56,6 +90,14 @@ export default {
 
     data() {
         return {
+        }
+    },
+    methods: {
+        changeIframeSrc(e) {
+            this.$store.dispatch('setCurrentIframeSrc', {
+                value: e.target.value,
+                text: e.target.options[e.target.selectedIndex].text
+            });
         }
     },
 
@@ -77,7 +119,32 @@ export default {
                 //this.$store.commit('setColCount', value);
                 this.$store.dispatch('setGutterWidth', value);
             }
+        },
+        isFluid: {
+            get () {
+                return this.$store.getters.isFluid;
+            },
+            set (value) {
+                //this.$store.commit('setColCount', value);
+                this.$store.dispatch('setIsFluid', value);
+            }
+        },
+        maxWidth: {
+            get () {
+                return this.$store.getters.maxWidth;
+            },
+            set (value) {
+                //this.$store.commit('setColCount', value);
+                this.$store.dispatch('setMaxWidth', value);
+            }
+        },
+        iframeList() {
+            return this.$store.getters.getIframeSrcList;
+        },
+        selectedIframeSrc() {
+            return this.$store.getters.getCurrentIframeSrc;
         }
+
 
     },
     created () {
@@ -103,6 +170,12 @@ export default {
 
             &:not(firstchild) {
                 margin-right: 20px;
+            }
+
+            &--inline {
+                .control {
+                    display: inline;
+                }
             }
         }
     }

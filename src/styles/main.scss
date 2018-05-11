@@ -22,7 +22,7 @@ html {
 
 
 // Forms
-input {
+.input, .select {
     background-color: #fff;
     border-color: #dbdbdb;
     color: #363636;
@@ -30,7 +30,7 @@ input {
     max-width: 100%;
     width: 100%;
 
-    -webkit-appearance: none;
+    //-webkit-appearance: none;
     align-items: center;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -46,6 +46,12 @@ input {
     padding-top: calc(.375em - 1px);
     position: relative;
     vertical-align: top;
+}
+input[type=checkbox], input[type=radio] {
+    vertical-align: baseline;
+}
+.checkbox input, .radio input {
+    cursor: pointer;
 }
 
 label {

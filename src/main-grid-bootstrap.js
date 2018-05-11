@@ -47,3 +47,7 @@ window.setGutterWidth = function (pWidth) {
     console.log(pWidth);
     gridApp.$bus.$emit('gutterWidthChange', pWidth);
 }
+window.setIsFluid = function (pValue) {
+    console.log(pValue);
+    gridApp.$bus.$emit('isFluidChange', pValue);
+}

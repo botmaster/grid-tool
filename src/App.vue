@@ -4,24 +4,14 @@
             <header-component/>
         </div>
         <main id="app__main">
-            <div>
-                <select @change="changeIframeSrc">
-                    <option
-                        v-for="option in iframeList"
-                        :key="option.value"
-                        :value="option.value">
-                        {{ option.text }}
-                    </option>
-                </select>
-                <span>Selected: {{ selectedIframeSrc }}</span>
-            </div>
+
             <div class="iframe-wrapper">
-                <resizer-rewamp @resize="onResize"/>
+                <resizer-rewamp/>
                 <iframe
                     ref="iframe"
                     id="iframe"
-                    name="Example2"
-                    title="Example2"
+                    name="iframeGrid"
+                    title="iframeGrid"
                     width="100%"
                     height="100%"
                     frameborder="0"
@@ -43,38 +33,25 @@
 </template>
 
 <script>
+
+// Import Components
 import HeaderComponent from './components/HeaderComponent';
 import ResizerRewamp from './components/ResizerRewamp';
+
 
 export default {
     name: 'App',
     data() {
-        return {
-        }
+        return {}
     },
     components: {
         ResizerRewamp,
         HeaderComponent
     },
     methods: {
-        onResize() {
-            //console.log(e);
-            /*this.$refs.iframe.width = e.size.width;
-            this.$refs.iframe.height = e.size.height;*/
-        },
-        changeIframeSrc(e) {
-            /*console.log(e.target.value);
-            console.log(e.target.options[e.target.selectedIndex].text)*/
-            this.$store.dispatch('setCurrentIframeSrc', {
-                value: e.target.value,
-                text: e.target.options[e.target.selectedIndex].text
-            });
-        }
+
     },
     computed: {
-        iframeList() {
-            return this.$store.getters.getIframeSrcList;
-        },
         selectedIframeSrc() {
             return this.$store.getters.getCurrentIframeSrc;
         }
@@ -98,7 +75,7 @@ export default {
         }
 
         &__main {
-            background-color: #eeeeee;
+            background-color: #ffffff;
             flex: 1;
             position: relative;
 
@@ -116,9 +93,10 @@ export default {
 
     .iframe-wrapper {
         position: relative;
-        background-color: red;
-        width: 1140px;
+        background-color: #f5f4f4;
+        width: 100%;
         height: 500px;
+        //box-shadow: 0 0 20px #00000045;
     }
 
     #iframe {
