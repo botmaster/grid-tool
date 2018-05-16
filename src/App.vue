@@ -23,9 +23,7 @@
         </main>
 
         <footer id="app__footer">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda beatae cum debitis eligendi,
-            eveniet illo illum laboriosam minus molestiae nostrum porro, qui quidem rem repudiandae sequi totam velit
-            voluptatem!
+            <footer-component/>
         </footer>
 
 
@@ -36,6 +34,7 @@
 
 // Import Components
 import HeaderComponent from './components/HeaderComponent';
+import FooterComponent from './components/FooterComponent';
 import ResizerRewamp from './components/ResizerRewamp';
 
 
@@ -46,7 +45,8 @@ export default {
     },
     components: {
         ResizerRewamp,
-        HeaderComponent
+        HeaderComponent,
+        FooterComponent
     },
     methods: {
 
@@ -75,7 +75,7 @@ export default {
         }
 
         &__main {
-            background-color: #ffffff;
+            background-color: #fffefe;
             flex: 1;
             position: relative;
 
@@ -86,8 +86,7 @@ export default {
         }
 
         &__footer {
-            background-color: black;
-            height: 200px;
+
         }
     }
 
@@ -96,7 +95,8 @@ export default {
         background-color: #f5f4f4;
         width: 100%;
         height: 500px;
-        //box-shadow: 0 0 20px #00000045;
+        outline: 1px solid #d9d9d9;
+        //box-shadow: 0 0 20px #00000010;
     }
 
     #iframe {

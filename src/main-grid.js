@@ -40,19 +40,19 @@ let gridApp = new Vue({
 }*/
 
 window.setColCount = function (pCount) {
-    console.log(pCount);
     gridApp.$bus.$emit('colCountChange', pCount);
 }
 window.setGutterWidth = function (pWidth) {
-    console.log(pWidth);
     gridApp.$bus.$emit('gutterWidthChange', pWidth);
 }
 window.setIsFluid = function (pValue) {
-    console.log(pValue);
     gridApp.$bus.$emit('isFluidChange', pValue);
 }
 
 window.setMaxWidth = function (pValue) {
-    console.log(pValue);
     gridApp.$bus.$emit('maxWidthChange', pValue);
+}
+
+window.setGutterFluid = function (pValue) {
+    gridApp.$bus.$emit('GutterFluidChange', pValue);
 }

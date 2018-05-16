@@ -9,7 +9,7 @@
                     v-for="(i, index) in Number(columnsNum)"
                     :key="index"
                     class="g-col"
-                    :style="{ flex: '0 0 ' + colWidth, paddingLeft: padding, paddingRight: padding}">
+                    :style="{ flex: '0 0 ' + colWidth, paddingLeft: isGutterFluid ? paddingFluid : padding, paddingRight: isGutterFluid ? paddingFluid : padding}">
                     {{ i }}
                 </div>
             </div>
@@ -27,7 +27,8 @@ export default {
             containerWidth: 1140,
             columnsNum: 12,
             gutterWidth: 30,
-            isFluid: false
+            isFluid: false,
+            isGutterFluid: false
         };
     },
     methods: {
@@ -72,6 +73,10 @@ export default {
             console.log('maxWidthChange', e);
             this.containerWidth = e;
         });
+        this.$bus.$on('GutterFluidChange', (e) => {
+            console.log('GutterFluidChange', e);
+            this.isGutterFluid = e;
+        });
 
     },
     beforeDestroy() {
@@ -89,10 +94,6 @@ export default {
         //background-color: black;
     }
 
-    body {
-
-    }
-
     .grid-view {
         height: 100%;
         font-size: 10px;
@@ -104,13 +105,6 @@ export default {
             margin: 0 auto;
             padding: 2px 0;
             background-color: #00ffff;
-            // margin-right: auto;
-            // margin-left: auto;
-            //background-image: url("~@/assets/logo.png");
-
-            &--fluid {
-
-            }
         }
 
         .g-row {
@@ -128,7 +122,8 @@ export default {
             position: relative;
             width: 100%;
             min-height: 1px;
-            background-image: linear-gradient(#00ffff42);
+            //background-image: linear-gradient(#00ffff42);
+            background-color: #00ffff42;
             background-clip: content-box;
             //height: 400px;
             align-items: stretch;

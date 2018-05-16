@@ -34,19 +34,7 @@
                             min="320"
                             max="3000"
                             step="10">
-                    </div>
-
-                    <div class="header__item header__item--inline">
-                        <label
-                            for="isFluid"
-                            class="label">Fluide</label>
-                        <div class="control">
-                            <input
-                                v-model="isFluid"
-                                id="isFluid"
-                                type="checkbox"
-                                class="checkbox">
-                        </div>
+                        <span>px</span>
                     </div>
                 </div>
                 <div class="header__item">
@@ -75,8 +63,33 @@
                             type="number"
                             min="0"
                             max="400">
+                        <span>px</span>
                     </div>
                 </div>
+                <div class="header__item header__item--inline">
+                    <label
+                        for="isFluid"
+                        class="label">Grille fluide</label>
+                    <div class="control">
+                        <input
+                            v-model="isFluid"
+                            id="isFluid"
+                            type="checkbox"
+                            class="checkbox">
+                    </div>
+                    <br>
+                    <label
+                        for="isGutterFluid"
+                        class="label">Goutières Fluides</label>
+                    <div class="control">
+                        <input
+                            v-model="isGutterFluid"
+                            id="isGutterFluid"
+                            type="checkbox"
+                            class="checkbox">
+                    </div>
+                </div>
+
 
             </div>
 
@@ -107,7 +120,6 @@ export default {
                 return this.$store.getters.colCount;
             },
             set (value) {
-                //this.$store.commit('setColCount', value);
                 this.$store.dispatch('setColCount', value);
             }
         },
@@ -116,7 +128,6 @@ export default {
                 return this.$store.getters.gutterWidth;
             },
             set (value) {
-                //this.$store.commit('setColCount', value);
                 this.$store.dispatch('setGutterWidth', value);
             }
         },
@@ -125,8 +136,15 @@ export default {
                 return this.$store.getters.isFluid;
             },
             set (value) {
-                //this.$store.commit('setColCount', value);
                 this.$store.dispatch('setIsFluid', value);
+            }
+        },
+        isGutterFluid: {
+            get () {
+                return this.$store.getters.gutterIsFluid;
+            },
+            set (value) {
+                this.$store.dispatch('setGutterFluid', value);
             }
         },
         maxWidth: {
@@ -134,7 +152,6 @@ export default {
                 return this.$store.getters.maxWidth;
             },
             set (value) {
-                //this.$store.commit('setColCount', value);
                 this.$store.dispatch('setMaxWidth', value);
             }
         },
@@ -172,11 +189,21 @@ export default {
                 margin-right: 20px;
             }
 
-            &--inline {
-                .control {
-                    display: inline;
+            .control {
+                display: flex;
+                align-items: baseline;
+
+                > *:not(:first-child) {
+                    margin-left: 5px;
                 }
             }
+
+            &--inline {
+                .control {
+                    display: inline-flex;
+                }
+            }
+
         }
     }
 </style>

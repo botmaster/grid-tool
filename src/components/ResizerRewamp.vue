@@ -84,8 +84,8 @@ export default {
         display: block;
         overflow: hidden;
         position: absolute;
-        width: 12px;
-        height: 12px;
+        width: 17px;
+        height: 17px;
         right: 0;
         bottom: 0;
         z-index: 9999999;
@@ -102,11 +102,11 @@ export default {
         top: 0;
         width: 0;
         height: 0;
-        border-bottom: 10px solid #ddd;
-        border-left: 10px solid transparent;
+        border-bottom: 15px solid #ababab;
+        border-left: 15px solid transparent;
     }
 
     .vue-modal-resizer.clicked::after {
-        border-bottom: 10px solid #369be9;
+        border-bottom: 15px solid #369be9;
     }
 </style>
