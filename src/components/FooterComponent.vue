@@ -2,23 +2,15 @@
     <div class="footer">
         <div class="footer__container">
             <a
+                v-for="device in deviceList"
+                :key="device.name"
                 href="#"
-                class="device-item">
-                <div class="device-item__icon"><i class="fal fa-mobile-android fa-lg"/></div>
-                <div class="device-item__label">mobile</div>
+                class="device-item"
+                @click="changeDevice(device.name)">
+                <div class="device-item__icon"><i :class="device.icon"/></div>
+                <div class="device-item__label">{{ device.name }}</div>
             </a>
-            <a
-                href="#"
-                class="device-item device-item--selected">
-                <div class="device-item__icon"><i class="fal fa-tablet-android fa-lg"/></div>
-                <div class="device-item__label">tablette</div>
-            </a>
-            <a
-                href="#"
-                class="device-item device-item--selected">
-                <div class="device-item__icon"><i class="fal fa-desktop fa-lg"/></div>
-                <div class="device-item__label">desktop</div>
-            </a>
+
             <div class="footer__form">
                 <div class="footer__form-item footer__form-item--inline">
                     <label
@@ -46,16 +38,18 @@ export default {
     name: 'FooterComponent',
     computed: {
         currentDevice() {
-            return this.$store.getters.getCurrentDeviceType.width;
+            return this.$store.getters.getCurrentDeviceByName(this.$store.getters.getCurrentDevice).width;
+        },
+        deviceList() {
+            return this.$store.getters.getDevicescList;
         }
     },
     methods: {
-        deviceWidthChange() {
-            this.$store.commit('setCurrentDevice', {
-                name: 'custom',
-                icon: '',
-                width: 1200
-            })
+        deviceWidthChange(e) {
+            this.$store.commit('setCustomDeviceWidth', Number(e.target.value))
+        },
+        changeDevice(deviceName) {
+            this.$store.commit('setCurrentDevice', deviceName);
         }
     },
 }

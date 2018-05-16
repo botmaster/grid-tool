@@ -17,23 +17,37 @@ const state = {
     deviceTypes: [
         {
             name: 'mobile',
-            icon: '',
+            icon: 'fal fa-mobile-android fa-lg',
             width: 320
+        },
+        {
+            name: 'tablet',
+            icon: 'fal fa-tablet-android fa-lg',
+            width: 768
+        },
+        {
+            name: 'desktop',
+            icon: 'fal fa-desktop fa-lg',
+            width: 1024
+        },
+        {
+            name: 'custom',
+            icon: 'fal fa-desktop fa-lg',
+            width: 3000
         }
     ],
-    currentDevice: {
-        name: 'mobile',
-        icon: '',
-        width: 320
-    }
+    currentDevice: 'mobile'
 }
 
 // getters
 const getters = {
-    getCurrentIframeSrc: state => state.currentIframe.value,
     getIframeSrcList: state => state.iframeSrcList,
-    getCurrentDeviceType: state => state.currentDevice,
+    getCurrentIframeSrc: state => state.currentIframe.value,
     getDevicescList: state => state.deviceTypes,
+    getCurrentDevice: state => state.currentDevice,
+    getCurrentDeviceByName: (state) => (name) => {
+        return state.deviceTypes.find(device => device.name === name)
+    }
 }
 
 // actions
@@ -52,6 +66,16 @@ const mutations = {
 
     setCurrentDevice(state, value) {
         state.currentDevice = value;
+    },
+
+    setCustomDeviceWidth(state, value) {
+        state.currentDevice = 'custom';
+        state.deviceTypes.splice(state.deviceTypes.indexOf(state.deviceTypes.find(device => device.name === 'custom')), 1);
+        state.deviceTypes.push({
+            name: 'custom',
+            icon: '',
+            width: value
+        });
     }
 
 }
