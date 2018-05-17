@@ -6,6 +6,7 @@
                 :key="device.name"
                 href="#"
                 class="device-item"
+                :class="{ 'device-item--selected': $store.getters.getCurrentDevice === device.name }"
                 @click="changeDevice(device.name)">
                 <div class="device-item__icon"><i :class="device.icon"/></div>
                 <div class="device-item__label">{{ device.name }}</div>

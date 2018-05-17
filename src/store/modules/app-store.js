@@ -69,11 +69,12 @@ const mutations = {
     },
 
     setCustomDeviceWidth(state, value) {
+        //TODO: refactor this.
         state.currentDevice = 'custom';
         state.deviceTypes.splice(state.deviceTypes.indexOf(state.deviceTypes.find(device => device.name === 'custom')), 1);
         state.deviceTypes.push({
             name: 'custom',
-            icon: '',
+            icon: 'fal fa-desktop fa-lg',
             width: value
         });
     }
