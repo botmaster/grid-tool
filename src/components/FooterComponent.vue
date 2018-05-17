@@ -24,6 +24,7 @@
                             type="number"
                             min="320"
                             max="2000"
+                            step="10"
                             :value="currentDevice"
                             @input="deviceWidthChange">
                         <span>px</span>
@@ -103,10 +104,10 @@ export default {
     }
 
     .device-item {
+        $self: &;
         display: flex;
         flex-direction: column;
         align-items: center;
-        $self: &;
         color: white;
         text-decoration: none;
 
@@ -122,6 +123,7 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.3s;
         }
 
         &__label {

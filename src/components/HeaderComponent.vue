@@ -66,6 +66,21 @@
                         <span>px</span>
                     </div>
                 </div>
+                <div class="header__item">
+                    <label
+                        for="margesWidth"
+                        class="label">Marges</label>
+                    <div class="control">
+                        <input
+                            v-model.number="marginWidth"
+                            id="margesWidth"
+                            class="input"
+                            type="number"
+                            min="0"
+                            max="800">
+                        <span>px</span>
+                    </div>
+                </div>
                 <div class="header__item header__item--inline">
                     <label
                         for="isFluid"
@@ -129,6 +144,14 @@ export default {
             },
             set (value) {
                 this.$store.dispatch('setGutterWidth', value);
+            }
+        },
+        marginWidth: {
+            get () {
+                return this.$store.getters.marginWidth;
+            },
+            set (value) {
+                this.$store.dispatch('setMarginWidth', value);
             }
         },
         isFluid: {

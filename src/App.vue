@@ -52,13 +52,9 @@ export default {
     },
     methods: {
         onResize(e) {
-            console.log(e);
-
             // On définit le divice courrant sur custom.
             // On stock la largeur de la fenetre.
             this.$store.commit('setCustomDeviceWidth', e.size.width);
-
-
         }
     },
     computed: {
@@ -110,6 +106,7 @@ export default {
         height: 500px;
         outline: 1px solid #d9d9d9;
         //box-shadow: 0 0 20px #00000010;
+        //transition: width 0.8s;
     }
 
     #iframe {

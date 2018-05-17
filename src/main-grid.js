@@ -45,6 +45,9 @@ window.setColCount = function (pCount) {
 window.setGutterWidth = function (pWidth) {
     gridApp.$bus.$emit('gutterWidthChange', pWidth);
 }
+window.setMarginWidth = function (pWidth) {
+    gridApp.$bus.$emit('marginWidthChange', pWidth);
+}
 window.setIsFluid = function (pValue) {
     gridApp.$bus.$emit('isFluidChange', pValue);
 }

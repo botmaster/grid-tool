@@ -3,7 +3,7 @@
         <div
             class="g-container"
             ref="containerCustom"
-            :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px') }">
+            :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin + 'px', paddingRight: margin + 'px' }">
             <div class="g-row">
                 <div
                     v-for="(i, index) in Number(columnsNum)"
@@ -27,6 +27,7 @@ export default {
             containerWidth: 1140,
             columnsNum: 12,
             gutterWidth: 30,
+            marginWidth: 0,
             isFluid: false,
             isGutterFluid: false
         };
@@ -50,6 +51,9 @@ export default {
         padding: function () {
             return this.gutterWidth / 2 + 'px';
         },
+        margin: function() {
+            return this.marginWidth
+        },
         paddingFluid: function () {
             return (this.gutterWidth / this.containerWidth * 100)/2 + '%';
         }
@@ -64,6 +68,10 @@ export default {
         this.$bus.$on('gutterWidthChange', (e) => {
             console.log('gutterWidthChange', e);
             this.gutterWidth = e;
+        });
+        this.$bus.$on('marginWidthChange', (e) => {
+            console.log('marginWidthChange', e);
+            this.marginWidth = e;
         });
         this.$bus.$on('isFluidChange', (e) => {
             console.log('isFluidChange', e);
@@ -97,7 +105,6 @@ export default {
     .grid-view {
         height: 100%;
         font-size: 10px;
-        justify-content: center;
         position: relative;
 
         .g-container {

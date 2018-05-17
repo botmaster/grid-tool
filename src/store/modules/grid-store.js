@@ -4,6 +4,7 @@ import im from '../../api/iframe-message'
 const state = {
     colCount: 12,
     gutterWidth: 30,
+    marginWidth: 0,
     gutterIsFluid: false,
     isFluid: false,
     maxWidth: 1140
@@ -13,6 +14,7 @@ const state = {
 const getters = {
     colCount: state => state.colCount,
     gutterWidth: state => state.gutterWidth,
+    marginWidth: state => state.marginWidth,
     isFluid: state => state.isFluid,
     maxWidth: state => state.maxWidth,
     gutterIsFluid: state => state.gutterIsFluid,
@@ -29,6 +31,11 @@ const actions = {
     setGutterWidth(context, value) {
         im.setGutterWidth(value);
         context.commit('setGutterWidth', value);
+    },
+
+    setMarginWidth(context, value) {
+        im.setMarginWidth(value);
+        context.commit('setMarginWidth', value);
     },
 
     setIsFluid(context, value) {
@@ -54,6 +61,9 @@ const mutations = {
     },
     setGutterWidth (state, nb) {
         state.gutterWidth = Number(nb);
+    },
+    setMarginWidth (state, nb) {
+        state.marginWidth = Number(nb);
     },
     setIsFluid (state, value) {
         state.isFluid = value

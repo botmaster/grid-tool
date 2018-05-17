@@ -9,6 +9,10 @@ export default {
         document.getElementById('iframe').contentWindow.setGutterWidth(pWidth);
     },
 
+    setMarginWidth(pWidth) {
+        document.getElementById('iframe').contentWindow.setMarginWidth(pWidth);
+    },
+
     setIsFluid(pValue) {
         document.getElementById('iframe').contentWindow.setIsFluid(pValue);
     },
