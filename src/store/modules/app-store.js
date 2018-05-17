@@ -33,10 +33,10 @@ const state = {
         {
             name: 'custom',
             icon: 'fal fa-desktop fa-lg',
-            width: 3000
+            width: 1200
         }
     ],
-    currentDevice: 'mobile'
+    currentDevice: 'custom'
 }
 
 // getters

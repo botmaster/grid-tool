@@ -59,7 +59,6 @@ export default {
 
     .footer {
         background-color: #666666;
-        height: 200px;
         color: white;
 
         &__container {

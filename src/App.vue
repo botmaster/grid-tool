@@ -4,9 +4,11 @@
             <header-component/>
         </div>
         <main id="app__main">
-
-            <div class="iframe-wrapper">
-                <resizer-rewamp/>
+            <div
+                class="iframe-wrapper"
+                :style="{width: selectedDeviceWidth + 'px'}">
+                <resizer-rewamp
+                    @resize="onResize"/>
                 <iframe
                     ref="iframe"
                     id="iframe"
@@ -49,11 +51,22 @@ export default {
         FooterComponent
     },
     methods: {
+        onResize(e) {
+            console.log(e);
 
+            // On définit le divice courrant sur custom.
+            // On stock la largeur de la fenetre.
+            this.$store.commit('setCustomDeviceWidth', e.size.width);
+
+
+        }
     },
     computed: {
         selectedIframeSrc() {
             return this.$store.getters.getCurrentIframeSrc;
+        },
+        selectedDeviceWidth() {
+            return this.$store.getters.getCurrentDeviceByName(this.$store.getters.getCurrentDevice).width;
         }
     },
     created() {
