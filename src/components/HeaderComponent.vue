@@ -59,7 +59,7 @@
             <div class="header__item">
                 <label
                     for="gutterWidth"
-                    class="label">Goutières</label>
+                    class="label">Gouttières</label>
                 <div class="control">
                     <input
                         v-model.number="gutterWidth"
@@ -100,7 +100,7 @@
                 <br>
                 <label
                     for="isGutterFluid"
-                    class="label">Goutières Fluides</label>
+                    class="label">Gouttières Fluides</label>
                 <div class="control">
                     <input
                         v-model="isGutterFluid"
