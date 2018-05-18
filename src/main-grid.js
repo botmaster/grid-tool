@@ -64,6 +64,6 @@ window.setGutterFluid = function (pValue) {
 window.requestSnapshot = function () {
     //gridApp.$bus.$emit('requestSnapshot');
     let node = document.getElementById('snap');
-    return dom2image.toJpeg(node, {});
+    return dom2image.toPng(node, {});
 }
 

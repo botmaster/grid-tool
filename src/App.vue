@@ -72,7 +72,7 @@ export default {
         requestCapture() {
             document.getElementById('iframe').contentWindow.requestSnapshot().then((dataUrl) => {
                 let link = document.createElement('a');
-                link.download = 'my-image-name.jpeg';
+                link.download = 'my-image-name.png';
                 link.href = dataUrl;
                 link.click();
             }).catch(function (error) {
