@@ -31,8 +31,10 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <button @click.prevent.stop="capture">capture</button>
+            <div class="footer__buttons">
+                <button
+                    @click.prevent.stop="capture"
+                    class="button">PNG&nbsp;<i class="fas fa-download"/></button>
             </div>
         </div>
     </div>
@@ -80,6 +82,7 @@ export default {
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: center;
+            align-items: flex-end;
         }
 
         &__form {
@@ -108,7 +111,10 @@ export default {
                     display: inline-flex;
                 }
             }
+        }
 
+        &__buttons {
+            margin-left: 20px;
         }
     }
 
