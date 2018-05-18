@@ -28,18 +28,6 @@
             <footer-component @requestCapture="requestCapture"/>
         </footer>
 
-        <modal
-            v-show="isModalVisible"
-            @close="closeModal">
-            <template slot="header">
-                Mon super titre
-            </template>
-            <template slot="body">
-                <img
-                    :src="captureData"
-                    alt="">
-            </template>
-        </modal>
     </div>
 </template>
 
