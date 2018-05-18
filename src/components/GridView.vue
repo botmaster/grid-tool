@@ -130,7 +130,7 @@ export default {
         .g-container {
             height: 100%;
             margin: 0 auto;
-            padding: 2px 0;
+            padding: 0;
             background-color: #00ffff;
         }
 
