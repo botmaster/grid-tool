@@ -1,18 +1,29 @@
 <template>
-    <div class="grid-view">
+    <div
+        class="grid-view"
+        ref="gridView"
+    >
         <div
-            class="g-container"
-            ref="containerCustom"
-            :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin + 'px', paddingRight: margin + 'px' }">
-            <div class="g-row">
-                <div
-                    v-for="(i, index) in Number(columnsNum)"
-                    :key="index"
-                    class="g-col"
-                    :style="{ flex: '0 0 ' + colWidth, paddingLeft: isGutterFluid ? paddingFluid : padding, paddingRight: isGutterFluid ? paddingFluid : padding}">
-                    {{ i }}
+            class="snap"
+            ref="snap"
+            id="snap"
+            :style="{maxWidth: isFluid ? 'none' : (containerWidth + 'px')}">
+            <div
+                class="g-container"
+                ref="containerCustom"
+                :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin + 'px', paddingRight: margin + 'px' }">
+
+                <div class="g-row">
+                    <div
+                        v-for="(i, index) in Number(columnsNum)"
+                        :key="index"
+                        class="g-col"
+                        :style="{ flex: '0 0 ' + colWidth, paddingLeft: isGutterFluid ? paddingFluid : padding, paddingRight: isGutterFluid ? paddingFluid : padding}">
+                        {{ i }}
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -51,11 +62,11 @@ export default {
         padding: function () {
             return this.gutterWidth / 2 + 'px';
         },
-        margin: function() {
+        margin: function () {
             return this.marginWidth
         },
         paddingFluid: function () {
-            return (this.gutterWidth / this.containerWidth * 100)/2 + '%';
+            return (this.gutterWidth / this.containerWidth * 100) / 2 + '%';
         }
     },
     created() {
@@ -106,6 +117,15 @@ export default {
         height: 100%;
         font-size: 10px;
         position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .snap {
+            height: 100%;
+            width: 100%;
+            flex: 0 0 auto;
+        }
 
         .g-container {
             height: 100%;
@@ -117,7 +137,7 @@ export default {
         .g-row {
             position: relative;
             height: 100%;
-            background-color: #FFFFFF   ;
+            background-color: #FFFFFF;
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;

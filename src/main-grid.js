@@ -4,6 +4,7 @@ import './styles/main.scss'
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Grid from './components/GridView'
+import dom2image from 'dom-to-image';
 //import Vuex from 'vuex'
 //import store from './store'
 
@@ -59,3 +60,10 @@ window.setMaxWidth = function (pValue) {
 window.setGutterFluid = function (pValue) {
     gridApp.$bus.$emit('GutterFluidChange', pValue);
 }
+
+window.requestSnapshot = function () {
+    //gridApp.$bus.$emit('requestSnapshot');
+    let node = document.getElementById('snap');
+    return dom2image.toJpeg(node, {});
+}
+

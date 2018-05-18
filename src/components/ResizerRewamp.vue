@@ -88,7 +88,7 @@ export default {
         height: 17px;
         right: 0;
         bottom: 0;
-        z-index: 9999999;
+        z-index: 90;
         background: transparent;
         cursor: se-resize;
     }

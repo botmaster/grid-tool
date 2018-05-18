@@ -31,11 +31,17 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <button @click.prevent.stop="capture">capture</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+
+//import dom2image from 'dom-to-image';
+
 export default {
     name: 'FooterComponent',
     computed: {
@@ -52,6 +58,9 @@ export default {
         },
         changeDevice(deviceName) {
             this.$store.commit('setCurrentDevice', deviceName);
+        },
+        capture() {
+            this.$emit('requestCapture');
         }
     },
 }
