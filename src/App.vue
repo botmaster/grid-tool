@@ -49,22 +49,19 @@
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import ResizerRewamp from './components/ResizerRewamp';
-import Modal from './components/Modal.vue';
 
 
 export default {
     name: 'App',
     data() {
         return {
-            isModalVisible: false,
             captureData: ''
         }
     },
     components: {
         ResizerRewamp,
         HeaderComponent,
-        FooterComponent,
-        Modal
+        FooterComponent
     },
     methods: {
         onResize(e) {
@@ -72,20 +69,12 @@ export default {
             // On stock la largeur de la fenetre.
             this.$store.commit('setCustomDeviceWidth', e.size.width);
         },
-        closeModal() {
-            this.isModalVisible = false;
-            this.captureData = ''
-        },
         requestCapture() {
-            this.isModalVisible = true;
             document.getElementById('iframe').contentWindow.requestSnapshot().then((dataUrl) => {
-                this.captureData = dataUrl;
-                //let myWindow = window.open('', 'myWindow', 'width=600,height=450');
-                //myWindow.document.appendChild(img);
-                //myWindow.document.write('<p>This is "MsgWindow". I am 200px wide and 100px tall!</p>');
-                //window.open(img.src, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400');
-                //myWindow.document.appendChild(img);
-
+                let link = document.createElement('a');
+                link.download = 'my-image-name.jpeg';
+                link.href = dataUrl;
+                link.click();
             }).catch(function (error) {
                 console.error('oops, something went wrong!', error);
             });
