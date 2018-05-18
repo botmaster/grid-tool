@@ -1,12 +1,15 @@
 <template>
     <header
         class="header">
-        <div class="header__logo">
+        <a
+            href="http://www.lahautesociete.com"
+            target="_blank"
+            class="header__logo">
             <img
                 src="@/assets/lhs-logo.svg"
                 alt="LHS"
                 width="60px">
-        </div>
+        </a>
         <div class="header__container">
             <div class="header__item">
                 <label
