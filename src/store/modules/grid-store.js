@@ -42,12 +42,12 @@ const actions = {
         switch (value) {
         case 'px':
             context.commit('setGutterUnit', value);
-            newValue = Math.round(context.state.gutterWidth * context.state.maxWidth / 100);
+            newValue = Math.round(context.state.gutterWidth * (context.state.maxWidth - context.state.marginWidth * 2) / 100);
             context.dispatch('setGutterWidth', newValue);
             break;
         case '%':
             context.commit('setGutterUnit', value);
-            newValue = context.state.gutterWidth / context.state.maxWidth * 100;
+            newValue = context.state.gutterWidth / (context.state.maxWidth - context.state.marginWidth * 2) * 100;
             context.dispatch('setGutterWidth', newValue);
             break;
         default:
