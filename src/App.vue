@@ -122,6 +122,7 @@ export default {
 
     #iframe {
         pointer-events: none;
+        overflow: auto;
     }
 
     .dummy {

@@ -69,9 +69,17 @@
                         id="gutterWidth"
                         class="input"
                         type="number"
+                        :step="gutterUnit === 'px' ? 1 : 0.1"
                         min="0"
-                        max="400">
-                    <span>px</span>
+                        max="400"><!--<span>px</span>-->
+                    <select
+                        id="gutterUnit"
+                        v-model="gutterUnit">
+                        <option
+                            value="px"
+                            selected>px</option>
+                        <option value="%">%</option>
+                    </select>
                 </div>
             </div>
             <div class="header__item">
@@ -143,10 +151,19 @@ export default {
         },
         gutterWidth: {
             get() {
+                //return Math.round(this.$store.getters.gutterWidth * 100) / 100;
                 return this.$store.getters.gutterWidth;
             },
             set(value) {
                 this.$store.dispatch('setGutterWidth', value);
+            }
+        },
+        gutterUnit: {
+            get() {
+                return this.$store.getters.gutterUnit;
+            },
+            set(value) {
+                this.$store.dispatch('setGutterUnit', value);
             }
         },
         marginWidth: {

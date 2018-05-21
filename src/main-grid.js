@@ -43,8 +43,11 @@ let gridApp = new Vue({
 window.setColCount = function (pCount) {
     gridApp.$bus.$emit('colCountChange', pCount);
 }
-window.setGutterWidth = function (pWidth) {
-    gridApp.$bus.$emit('gutterWidthChange', pWidth);
+window.setGutterWidth = function ({value, unit}) {
+    gridApp.$bus.$emit('gutterWidthChange', {value, unit});
+}
+window.setGutterUnit = function (pUnit) {
+    gridApp.$bus.$emit('gutterUnitChange', pUnit);
 }
 window.setMarginWidth = function (pWidth) {
     gridApp.$bus.$emit('marginWidthChange', pWidth);

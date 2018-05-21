@@ -5,8 +5,8 @@ export default {
         document.getElementById('iframe').contentWindow.setColCount(pCol);
     },
 
-    setGutterWidth(pWidth) {
-        document.getElementById('iframe').contentWindow.setGutterWidth(pWidth);
+    setGutterWidth({value, unit}) {
+        document.getElementById('iframe').contentWindow.setGutterWidth({value, unit});
     },
 
     setMarginWidth(pWidth) {

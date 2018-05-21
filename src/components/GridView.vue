@@ -38,6 +38,7 @@ export default {
             containerWidth: 1140,
             columnsNum: 12,
             gutterWidth: 30,
+            gutterUnit: 'px',
             marginWidth: 0,
             isFluid: false,
             isGutterFluid: false
@@ -60,7 +61,7 @@ export default {
             return colWidth / this.containerWidth * 100 + '%';
         },
         padding: function () {
-            return this.gutterWidth / 2 + 'px';
+            return this.gutterWidth / 2 + this.gutterUnit;
         },
         margin: function () {
             return this.marginWidth
@@ -78,7 +79,8 @@ export default {
         });
         this.$bus.$on('gutterWidthChange', (e) => {
             console.log('gutterWidthChange', e);
-            this.gutterWidth = e;
+            this.gutterWidth = e.value;
+            this.gutterUnit = e.unit
         });
         this.$bus.$on('marginWidthChange', (e) => {
             console.log('marginWidthChange', e);
