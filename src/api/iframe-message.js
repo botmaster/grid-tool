@@ -21,8 +21,8 @@ export default {
         document.getElementById('iframe').contentWindow.setMaxWidth(pValue);
     },
 
-    setGutterFluid(pValue) {
+    /*setGutterFluid(pValue) {
         document.getElementById('iframe').contentWindow.setGutterFluid(pValue);
-    }
+    }*/
 
 }

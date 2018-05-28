@@ -60,9 +60,9 @@ window.setMaxWidth = function (pValue) {
     gridApp.$bus.$emit('maxWidthChange', pValue);
 }
 
-window.setGutterFluid = function (pValue) {
+/*window.setGutterFluid = function (pValue) {
     gridApp.$bus.$emit('GutterFluidChange', pValue);
-}
+}*/
 
 window.requestSnapshot = function () {
     //gridApp.$bus.$emit('requestSnapshot');

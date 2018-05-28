@@ -18,7 +18,7 @@
                         v-for="(i, index) in Number(columnsNum)"
                         :key="index"
                         class="g-col"
-                        :style="{ flex: '0 0 ' + colWidth, paddingLeft: isGutterFluid ? paddingFluid : padding, paddingRight: isGutterFluid ? paddingFluid : padding}">
+                        :style="{ flex: '0 0 ' + colWidth, paddingLeft: padding, paddingRight: padding}">
                         {{ i }}
                     </div>
                 </div>
@@ -41,7 +41,6 @@ export default {
             gutterUnit: 'px',
             marginWidth: 0,
             isFluid: false,
-            isGutterFluid: false
         };
     },
     methods: {
@@ -61,13 +60,17 @@ export default {
             return colWidth / this.containerWidth * 100 + '%';
         },
         padding: function () {
-            return this.gutterWidth / 2 + this.gutterUnit;
+            if(this.gutterUnit === '%') {
+                return this.gutterWidth / 2 + this.gutterUnit;
+            } else if (this.gutterUnit === 'px') {
+                return this.gutterWidth / 2 + this.gutterUnit;
+            }
+            else {
+                console.error('Impossible d\'interpréter l\'ulinté');
+            }
         },
         margin: function () {
             return this.marginWidth
-        },
-        paddingFluid: function () {
-            return (this.gutterWidth / this.containerWidth * 100) / 2 + '%';
         }
     },
     created() {
@@ -86,17 +89,13 @@ export default {
             console.log('marginWidthChange', e);
             this.marginWidth = e;
         });
-        this.$bus.$on('isFluidChange', (e) => {
+        /*this.$bus.$on('isFluidChange', (e) => {
             console.log('isFluidChange', e);
             this.isFluid = e;
-        });
+        });*/
         this.$bus.$on('maxWidthChange', (e) => {
             console.log('maxWidthChange', e);
             this.containerWidth = e;
-        });
-        this.$bus.$on('GutterFluidChange', (e) => {
-            console.log('GutterFluidChange', e);
-            this.isGutterFluid = e;
         });
 
     },

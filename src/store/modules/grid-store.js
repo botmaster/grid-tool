@@ -42,11 +42,13 @@ const actions = {
         switch (value) {
         case 'px':
             context.commit('setGutterUnit', value);
+            context.commit('setGutterFluid', false);
             newValue = Math.round(context.state.gutterWidth * (context.state.maxWidth - context.state.marginWidth * 2) / 100);
             context.dispatch('setGutterWidth', newValue);
             break;
         case '%':
             context.commit('setGutterUnit', value);
+            context.commit('setGutterFluid', true);
             newValue = context.state.gutterWidth / (context.state.maxWidth - context.state.marginWidth * 2) * 100;
             context.dispatch('setGutterWidth', newValue);
             break;
@@ -73,8 +75,19 @@ const actions = {
     },
 
     setGutterFluid(context, value) {
-        im.setGutterFluid(value);
         context.commit('setGutterFluid', value);
+
+        switch (value) {
+        case true:
+            context.dispatch('setGutterUnit', '%');
+            break;
+        case false:
+            context.dispatch('setGutterUnit', 'px');
+            break;
+        default:
+            console.error('setGutterFluid, value not valide');
+        }
+
     }
 }
 
