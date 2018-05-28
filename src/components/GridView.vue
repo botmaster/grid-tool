@@ -89,10 +89,10 @@ export default {
             console.log('marginWidthChange', e);
             this.marginWidth = e;
         });
-        /*this.$bus.$on('isFluidChange', (e) => {
+        this.$bus.$on('isFluidChange', (e) => {
             console.log('isFluidChange', e);
             this.isFluid = e;
-        });*/
+        });
         this.$bus.$on('maxWidthChange', (e) => {
             console.log('maxWidthChange', e);
             this.containerWidth = e;
