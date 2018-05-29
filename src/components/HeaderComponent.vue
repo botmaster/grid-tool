@@ -92,9 +92,17 @@
                         id="margesWidth"
                         class="input"
                         type="number"
+                        :step="marginUnit === 'px' ? 1 : 0.1"
                         min="0"
-                        max="800">
-                    <span>px</span>
+                        max="800"><!--<span>px</span>-->
+                    <select
+                        id="marginUnit"
+                        v-model="marginUnit">
+                        <option
+                            value="px"
+                            selected>px</option>
+                        <option value="%">%</option>
+                    </select>
                 </div>
             </div>
             <div class="header__item header__item--inline">
@@ -172,6 +180,14 @@ export default {
             },
             set(value) {
                 this.$store.dispatch('setMarginWidth', value);
+            }
+        },
+        marginUnit: {
+            get() {
+                return this.$store.getters.marginUnit;
+            },
+            set(value) {
+                this.$store.dispatch('setMarginUnit', value);
             }
         },
         isFluid: {

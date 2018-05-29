@@ -49,8 +49,8 @@ window.setGutterWidth = function ({value, unit}) {
 window.setGutterUnit = function (pUnit) {
     gridApp.$bus.$emit('gutterUnitChange', pUnit);
 }
-window.setMarginWidth = function (pWidth) {
-    gridApp.$bus.$emit('marginWidthChange', pWidth);
+window.setMarginWidth = function ({value, unit}) {
+    gridApp.$bus.$emit('marginWidthChange', {value, unit});
 }
 window.setIsFluid = function (pValue) {
     gridApp.$bus.$emit('isFluidChange', pValue);

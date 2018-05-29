@@ -9,8 +9,8 @@ export default {
         document.getElementById('iframe').contentWindow.setGutterWidth({value, unit});
     },
 
-    setMarginWidth(pWidth) {
-        document.getElementById('iframe').contentWindow.setMarginWidth(pWidth);
+    setMarginWidth({value, unit}) {
+        document.getElementById('iframe').contentWindow.setMarginWidth({value, unit});
     },
 
     setIsFluid(pValue) {

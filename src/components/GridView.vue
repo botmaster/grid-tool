@@ -11,7 +11,7 @@
             <div
                 class="g-container"
                 ref="containerCustom"
-                :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin + 'px', paddingRight: margin + 'px' }">
+                :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin, paddingRight: margin }">
 
                 <div class="g-row">
                     <div
@@ -40,6 +40,7 @@ export default {
             gutterWidth: 30,
             gutterUnit: 'px',
             marginWidth: 0,
+            marginUnit: 'px',
             isFluid: false,
         };
     },
@@ -70,7 +71,7 @@ export default {
             }
         },
         margin: function () {
-            return this.marginWidth
+            return this.marginWidth + this.marginUnit;
         }
     },
     created() {
@@ -87,7 +88,8 @@ export default {
         });
         this.$bus.$on('marginWidthChange', (e) => {
             console.log('marginWidthChange', e);
-            this.marginWidth = e;
+            this.marginWidth = e.value;
+            this.marginUnit = e.unit;
         });
         this.$bus.$on('isFluidChange', (e) => {
             console.log('isFluidChange', e);

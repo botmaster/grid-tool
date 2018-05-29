@@ -6,6 +6,7 @@ const state = {
     gutterWidth: 30,
     gutterUnit: 'px',
     marginWidth: 0,
+    marginUnit: 'px',
     gutterIsFluid: false,
     isFluid: false,
     maxWidth: 1140
@@ -17,6 +18,7 @@ const getters = {
     gutterWidth: state => state.gutterWidth,
     gutterUnit: state => state.gutterUnit,
     marginWidth: state => state.marginWidth,
+    marginUnit: state => state.marginUnit,
     isFluid: state => state.isFluid,
     maxWidth: state => state.maxWidth,
     gutterIsFluid: state => state.gutterIsFluid,
@@ -39,29 +41,52 @@ const actions = {
 
         // On converti la valeur en fonction de l'unité.
         let newValue = null;
+
+        // Si les marges sont en % on les passe en px.
+        let marginWidth = context.state.marginUnit === '%' ? context.state.marginWidth / 100 * context.state.maxWidth : context.state.marginWidth;
         switch (value) {
         case 'px':
             context.commit('setGutterUnit', value);
             context.commit('setGutterFluid', false);
-            newValue = Math.round(context.state.gutterWidth * (context.state.maxWidth - context.state.marginWidth * 2) / 100);
+            newValue = Math.round(context.state.gutterWidth * (context.state.maxWidth - marginWidth * 2) / 100);
             context.dispatch('setGutterWidth', newValue);
             break;
         case '%':
             context.commit('setGutterUnit', value);
             context.commit('setGutterFluid', true);
-            newValue = context.state.gutterWidth / (context.state.maxWidth - context.state.marginWidth * 2) * 100;
+            newValue = context.state.gutterWidth / (context.state.maxWidth - marginWidth * 2) * 100;
             context.dispatch('setGutterWidth', newValue);
             break;
         default:
             console.error('setGutterUnit, value not valide');
         }
 
-
     },
 
     setMarginWidth(context, value) {
-        im.setMarginWidth(value);
+        im.setMarginWidth({value, 'unit': context.state.marginUnit });
         context.commit('setMarginWidth', value);
+    },
+
+    setMarginUnit(context, value) {
+
+        // On converti la valeur en fonction de l'unité.
+
+        switch (value) {
+        case 'px':
+            context.commit('setMarginUnit', value);
+            context.dispatch('setMarginWidth', context.state.marginWidth * context.state.maxWidth / 100);
+            break;
+        case '%':
+            context.commit('setMarginUnit', value);
+            context.dispatch('setMarginWidth', context.state.marginWidth / context.state.maxWidth * 100);
+
+            break;
+        default:
+            console.error('setGutterUnit, value not valide');
+        }
+
+
     },
 
     setIsFluid(context, value) {
@@ -104,6 +129,9 @@ const mutations = {
     },
     setMarginWidth(state, nb) {
         state.marginWidth = Number(nb);
+    },
+    setMarginUnit(state, value) {
+        state.marginUnit = value;
     },
     setIsFluid(state, value) {
         state.isFluid = value
