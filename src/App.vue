@@ -85,8 +85,9 @@ export default {
 <style scoped lang="scss">
     #app {
 
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-gap: 0;
         min-height: 100vh;
         position: relative;
 

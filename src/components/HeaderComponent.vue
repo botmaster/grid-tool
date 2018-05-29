@@ -17,6 +17,7 @@
                     class="label">Type de grille</label>
                 <div class="control">
                     <select
+                        disabled
                         id="gridType"
                         class="select"
                         @change="changeIframeSrc">
