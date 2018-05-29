@@ -111,9 +111,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 
+    @import "../styles/abstracts/variables";
+
     html, body {
         height: 100%;
-        //background-color: black;
+        background-color: #8e97a0;
     }
 
     .grid-view {
@@ -134,13 +136,13 @@ export default {
             height: 100%;
             margin: 0 auto;
             padding: 0;
-            background-color: #00ffff;
+            background-color: $color-lime;
         }
 
         .g-row {
             position: relative;
             height: 100%;
-            background-color: #FFFFFF;
+            background-color: $white;
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -153,14 +155,14 @@ export default {
             width: 100%;
             min-height: 1px;
             //background-image: linear-gradient(#00ffff42);
-            background-color: #00ffff42;
+            background-color: $color-pink;
             background-clip: content-box;
             //height: 400px;
             align-items: stretch;
 
         }
 
-        .high-light-container {
+        /*.high-light-container {
             background-color: red;
             padding-top: 2px;
             padding-bottom: 2px;
@@ -171,7 +173,7 @@ export default {
         .high-light-col {
             background-image: linear-gradient(#f7dddd);
             background-clip: content-box;
-        }
+        }*/
 
         .dom-wrap {
             display: flex;

@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    @import "./styles/abstracts/variables";
     #app {
 
         display: grid;
@@ -96,7 +97,7 @@ export default {
         }
 
         &__main {
-            background-color: #fffefe;
+            background-color: $gray-200;
             flex: 1;
             position: relative;
 
@@ -116,9 +117,12 @@ export default {
         background-color: #f5f4f4;
         width: 100%;
         height: 500px;
-        outline: 1px solid #d9d9d9;
-        //box-shadow: 0 0 20px #00000010;
+        //outline: 1px solid #d9d9d9;
+        box-shadow: 0 6px 29px 0 rgba(11, 10, 10, 0.2);
         //transition: width 0.8s;
+
+
+
     }
 
     #iframe {

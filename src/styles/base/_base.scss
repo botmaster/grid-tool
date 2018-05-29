@@ -26,9 +26,8 @@ html {
 body {
     @extend %font-latoRegular;
     margin: 0;
-    //@include font-size(base);
     font-size: 1.6rem;
-    //background-color: $background-base;
+    background-color: $gray-200;
     //color: $color-base;
     //font-family: $font-family-base;
     //line-height: $line-height-base;

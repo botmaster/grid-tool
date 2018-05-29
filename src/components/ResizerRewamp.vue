@@ -79,13 +79,15 @@ export default {
     }
 }
 </script>
-<style>
+<style  lang="scss">
+    @import "../styles/abstracts/variables";
+
     .vue-modal-resizer {
         display: block;
         overflow: hidden;
         position: absolute;
-        width: 17px;
-        height: 17px;
+        width: 25px;
+        height: 25px;
         right: 0;
         bottom: 0;
         z-index: 90;
@@ -102,11 +104,11 @@ export default {
         top: 0;
         width: 0;
         height: 0;
-        border-bottom: 15px solid #ababab;
-        border-left: 15px solid transparent;
+        border-bottom: 20px solid $black;
+        border-left: 20px solid transparent;
     }
 
     .vue-modal-resizer.clicked::after {
-        border-bottom: 15px solid #369be9;
+        border-bottom: 20px solid $white;
     }
 </style>
