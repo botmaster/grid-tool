@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "dom-to-image": "^2.6.0",
     "vue": "^2.5.2",
     "vue-draggable-resizable": "^1.7.1",

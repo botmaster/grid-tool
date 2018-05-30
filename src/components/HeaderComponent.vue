@@ -15,51 +15,21 @@
                 <label
                     for="gridType"
                     class="label">Type de grille</label>
-                <div class="control">
-                    <select
-                        disabled
-                        id="gridType"
-                        class="select"
-                        @change="changeIframeSrc">
-                        <option
-                            v-for="option in iframeList"
-                            :key="option.value"
-                            :value="option.value">
-                            {{ option.text }}
-                        </option>
-                    </select>
-                </div>
+
+                <select
+                    id="gridType"
+                    class="custom-select"
+                    @change="changeIframeSrc">
+                    <option
+                        v-for="option in iframeList"
+                        :key="option.value"
+                        :value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+
             </div>
-            <div class="header__item">
-                <label
-                    for="maxWidth"
-                    class="label">Largeur maximum</label>
-                <div class="control">
-                    <input
-                        id="maxWidth"
-                        v-model="maxWidth"
-                        class="input"
-                        type="number"
-                        min="320"
-                        max="3000"
-                        step="10">
-                    <span>px</span>
-                </div>
-            </div>
-            <div class="header__item">
-                <label
-                    for="colNumber"
-                    class="label">Nombre de colonnes</label>
-                <div class="control">
-                    <input
-                        v-model.number="colCount"
-                        class="input"
-                        id="colNumber"
-                        type="number"
-                        min="1"
-                        max="30">
-                </div>
-            </div>
+
             <div class="header__item">
                 <label
                     for="gutterWidth"
@@ -82,7 +52,53 @@
                         <option value="%">%</option>
                     </select>
                 </div>
+
+                <div class="input-group">
+                    <input
+                        type="number"
+                        class="form-control"
+                        v-model.number="gutterWidth"
+                        :step="gutterUnit === 'px' ? 1 : 0.1"
+                        min="0"
+                        max="400">
+                    <button-group-component/>
+                </div>
+                <button-group-component/>
             </div>
+
+            <div class="header__item">
+                <div class="form-group">
+                    <label
+                        for="colNumber"
+                        class="label">Nombre</label>
+
+                    <input
+                        v-model.number="colCount"
+                        class="form-control"
+                        id="colNumber"
+                        type="number"
+                        min="1"
+                        max="30">
+                </div>
+            </div>
+            <div class="header__item">
+                <label
+                    for="maxWidth"
+                    class="label">Largeur maximum</label>
+                <div class="control">
+                    <input
+                        id="maxWidth"
+                        v-model="maxWidth"
+                        class="input"
+                        type="number"
+                        min="320"
+                        max="3000"
+                        step="10">
+                    <span>px</span>
+                </div>
+            </div>
+
+
             <div class="header__item">
                 <label
                     for="margesWidth"
@@ -134,8 +150,12 @@
 </template>
 
 <script>
+import ButtonGroupComponent from '@/components/ButtonGroupComponent'
 export default {
     name: 'HeaderComponent',
+    components: {
+        ButtonGroupComponent
+    },
 
     data() {
         return {}
@@ -232,19 +252,21 @@ export default {
 
 <style scoped lang="scss">
     .header {
-        background-color: black;
-        color: white;
+        position: relative;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         &__logo {
             //background-color: red;
             padding: 0 20px;
-            flex: 0 0 auto;
+           position: absolute;
+            top: 2rem;
+            left: 2rem;
         }
 
         &__container {
-            flex: 1;
+            flex: 0 0 auto;
             /*max-width: 1140px;
             margin: 0 auto;*/
             padding: 20px;
@@ -258,20 +280,7 @@ export default {
                 margin-right: 20px;
             }
 
-            .control {
-                display: flex;
-                align-items: baseline;
 
-                > *:not(:first-child) {
-                    margin-left: 5px;
-                }
-            }
-
-            &--inline {
-                .control {
-                    display: inline-flex;
-                }
-            }
 
         }
     }

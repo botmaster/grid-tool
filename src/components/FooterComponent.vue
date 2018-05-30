@@ -1,6 +1,10 @@
 <template>
     <div class="footer">
         <div class="footer__container">
+            <button-group-component
+                :item-list="deviceList"
+                :selected="$store.getters.getCurrentDevice"
+                @input="changeDevice"/>
             <a
                 v-for="device in deviceList"
                 :key="device.name"
@@ -42,24 +46,33 @@
 
 <script>
 
-//import dom2image from 'dom-to-image';
+import ButtonGroupComponent from '@/components/ButtonGroupComponent'
 
 export default {
     name: 'FooterComponent',
+    components: {
+        ButtonGroupComponent
+
+    },
     computed: {
         currentDevice() {
             return this.$store.getters.getCurrentDeviceByName(this.$store.getters.getCurrentDevice).width;
         },
         deviceList() {
-            return this.$store.getters.getDevicescList;
+            let devices = this.$store.getters.getDevicescList;
+            return devices.map(item => {
+                let obj = {...item};
+                obj.name = null;
+                return obj;
+            });
         }
     },
     methods: {
         deviceWidthChange(e) {
             this.$store.commit('setCustomDeviceWidth', Number(e.target.value))
         },
-        changeDevice(deviceName) {
-            this.$store.commit('setCurrentDevice', deviceName);
+        changeDevice(e) {
+            this.$store.commit('setCurrentDevice', e.selected);
         },
         capture() {
             this.$emit('requestCapture');
@@ -71,8 +84,8 @@ export default {
 <style scoped lang="scss">
 
     .footer {
-        background-color: #666666;
-        color: white;
+        //background-color: #666666;
+        //color: white;
 
         &__container {
             max-width: 1140px;
@@ -123,7 +136,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        color: white;
+
         text-decoration: none;
 
         &:not(:first-child) {
@@ -131,6 +144,7 @@ export default {
         }
 
         &__icon {
+            color: white;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -144,6 +158,7 @@ export default {
         &__label {
             margin-top: 10px;
             font-size: 12px;
+            color: inherit;
         }
 
         &--selected {

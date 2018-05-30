@@ -3,12 +3,12 @@
 // 1. Configuration and helpers
 @import
 'abstracts/variables',
-//'abstracts/bootstrap-vars',
+'abstracts/bootstrap-vars',
 'abstracts/functions',
 'abstracts/mixins';
 
 // 2. Vendors
-//@import "vendor/bootstrap";
+@import "vendor/bootstrap";
 //@import "vendor/font-awesome";
 
 // 3. Base stuff
