@@ -24,4 +24,18 @@ html {
 }*/
 
 
+.input-group-append {
+    .btn-group {
+        .btn {
+
+            &:first-child {
+                //border-left: none;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+}
+
+
 

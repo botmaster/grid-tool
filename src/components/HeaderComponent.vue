@@ -42,13 +42,16 @@
                         for="colNumber"
                         class="label">Nombre</label>
 
-                    <input
-                        v-model.number="colCount"
-                        class="form-control"
-                        id="colNumber"
-                        type="number"
-                        min="1"
-                        max="30">
+                    <div class="form-control form-control--gutter">
+                        <input
+                            v-model.number="colCount"
+                            class="form-control border-0 p-0"
+                            id="colNumber"
+                            type="number"
+                            min="1"
+                            max="30">
+                    </div>
+
                 </div>
             </div>
 
@@ -69,7 +72,7 @@
                     <div class="input-group-append">
                         <div class="btn-group btn-group-toggle">
                             <label
-                                class="btn btn-secondary"
+                                class="btn btn-outline-secondary"
                                 :class="{ active: gutterUnit === 'px' } ">
                                 <input
                                     v-model="gutterUnit"
@@ -79,7 +82,7 @@
                                     autocomplete="off">px
                             </label>
                             <label
-                                class="btn btn-secondary"
+                                class="btn btn-outline-secondary"
                                 :class="{ active: gutterUnit === '%' } ">
                                 <input
                                     v-model="gutterUnit"
@@ -94,29 +97,8 @@
             </div>
 
             <!-- Marges -->
-            <div class="header__item">
-                <!--<label
-                    for="margesWidth"
-                    class="label">Marges</label>
-                <div class="control">
-                    <input
-                        v-model.number="marginWidth"
-                        id="margesWidth"
-                        class="input"
-                        type="number"
-                        :step="marginUnit === 'px' ? 1 : 0.1"
-                        min="0"
-                        max="800">
-                    <select
-                        id="marginUnit"
-                        v-model="marginUnit">
-                        <option
-                            value="px"
-                            selected>px
-                        </option>
-                        <option value="%">%</option>
-                    </select>
-                </div>-->
+            <div class="header__item header__item--margin">
+
                 <label
                     for="margesWidth"
                     class="label">Marges</label>
@@ -132,7 +114,7 @@
                     <div class="input-group-append">
                         <div class="btn-group btn-group-toggle">
                             <label
-                                class="btn btn-secondary"
+                                class="btn btn-outline-secondary"
                                 :class="{ active: marginUnit === 'px' } ">
                                 <input
                                     v-model="marginUnit"
@@ -142,7 +124,7 @@
                                     autocomplete="off">px
                             </label>
                             <label
-                                class="btn btn-secondary"
+                                class="btn btn-outline-secondary"
                                 :class="{ active: marginUnit === '%' } ">
                                 <input
                                     v-model="marginUnit"
@@ -158,19 +140,21 @@
 
             <!-- Largeur max de la grille -->
             <div class="header__item">
-                <label
-                    for="maxWidth"
-                    class="label">Largeur maximum</label>
-                <div class="control">
-                    <input
-                        id="maxWidth"
-                        v-model="maxWidth"
-                        class="input"
-                        type="number"
-                        min="320"
-                        max="3000"
-                        step="10">
-                    <span>px</span>
+                <div class="form-group">
+                    <label
+                        for="maxWidth"
+                        class="">Largeur maximum</label>
+                    <div class="form-inline">
+                        <input
+                            id="maxWidth"
+                            v-model="maxWidth"
+                            class="form-control mr-2"
+                            type="number"
+                            min="320"
+                            max="3000"
+                            step="10">
+                        <span>px</span>
+                    </div>
                 </div>
             </div>
 
@@ -300,12 +284,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    @import "../styles/abstracts/variables";
+
     .header {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
 
+        // Le logo
         &__logo {
             //background-color: red;
             padding: 0 20px;
@@ -314,6 +301,7 @@ export default {
             left: 2rem;
         }
 
+        // Le conteneur
         &__container {
             flex: 0 0 auto;
             /*max-width: 1140px;
@@ -322,11 +310,47 @@ export default {
             display: flex;
         }
 
+        // Les items du conteneur
         &__item {
             flex: 0 0 auto;
 
+            // On espace les éléments
             &:not(firstchild) {
                 margin-right: 20px;
+            }
+
+            // L'item des marges
+            &--margin {
+                .input-group-append {
+                    > .btn-group {
+                        > .btn-outline-secondary:not(:disabled):not(.disabled).active {
+                            background-color: $color-lime;
+                        }
+                    }
+                }
+            }
+
+            // L'item des gouttières
+            &--gutter {
+
+            }
+
+            // On customise l'input du nombre de colonnes.
+            .form-control--gutter {
+                position: relative;
+                padding-right: 20px;
+                &:after {
+                    content:"";
+                    position: absolute;
+                    right: 6px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: $color-pink;
+                }
             }
 
         }
