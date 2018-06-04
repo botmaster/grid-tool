@@ -1,44 +1,48 @@
 <template>
     <div class="footer">
         <div class="footer__container">
-            <button-group-component
-                :item-list="deviceList"
-                :selected="$store.getters.getCurrentDevice"
-                @input="changeDevice"/>
-            <a
-                v-for="device in deviceList"
-                :key="device.name"
-                href="#"
-                class="device-item"
-                :class="{ 'device-item--selected': $store.getters.getCurrentDevice === device.name }"
-                @click="changeDevice(device.name)">
-                <div class="device-item__icon"><i :class="device.icon"/></div>
-                <div class="device-item__label">{{ device.name }}</div>
-            </a>
 
+            <!-- Liste des divices -->
+            <div
+                class="btn-group">
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    v-for="(item, index) in deviceList"
+                    :key="index"
+                    :class="{ 'active': currentDevice.name === item.name }"
+                    @click.prevent="changeDevice(item)">
+                    <span
+                        v-if="item.label && item.label !=='' ">{{ item.label }}</span>
+                    <span
+                        v-if="item.icon"
+                        class=""><i :class="item.icon"/></span>
+                </button>
+            </div>
+
+            <!-- Largeur de la page -->
             <div class="footer__form">
-                <div class="footer__form-item footer__form-item--inline">
-                    <label
-                        for="pageWidth"
-                        class="label">Largeur page</label>
-                    <div class="control">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="pageWidth">Largeur page</label>
                         <input
                             id="pageWidth"
-                            class="input"
+                            class="form-control ml-2 mr-2"
                             type="number"
                             min="320"
                             max="2000"
                             step="10"
-                            :value="currentDevice"
+                            :value="currentDevice.width"
                             @input="deviceWidthChange">
                         <span>px</span>
                     </div>
-                </div>
+                </form>
             </div>
+
             <div class="footer__buttons">
                 <button
                     @click.prevent.stop="capture"
-                    class="button">PNG&nbsp;<i class="fas fa-download"/></button>
+                    class="btn btn-outline-secondary">PNG&nbsp;<i class="fas fa-download"/></button>
             </div>
         </div>
     </div>
@@ -46,23 +50,19 @@
 
 <script>
 
-import ButtonGroupComponent from '@/components/ButtonGroupComponent'
 
 export default {
     name: 'FooterComponent',
-    components: {
-        ButtonGroupComponent
-
-    },
+    components: {},
     computed: {
         currentDevice() {
-            return this.$store.getters.getCurrentDeviceByName(this.$store.getters.getCurrentDevice).width;
+            return this.$store.getters.getCurrentDeviceByName(this.$store.getters.getCurrentDevice);
         },
         deviceList() {
             let devices = this.$store.getters.getDevicescList;
             return devices.map(item => {
                 let obj = {...item};
-                obj.name = null;
+                obj.label = '';
                 return obj;
             });
         }
@@ -72,7 +72,8 @@ export default {
             this.$store.commit('setCustomDeviceWidth', Number(e.target.value))
         },
         changeDevice(e) {
-            this.$store.commit('setCurrentDevice', e.selected);
+            //debugger;
+            this.$store.commit('setCurrentDevice', e.name);
         },
         capture() {
             this.$emit('requestCapture');
@@ -99,73 +100,14 @@ export default {
         }
 
         &__form {
-            width: 120px;
-            margin-left: 80px;
+            margin-left: 20px;
         }
 
-        &__form-item {
-            flex: 0 0 auto;
-
-            &:not(firstchild) {
-                margin-right: 20px;
-            }
-
-            .control {
-                display: flex;
-                align-items: baseline;
-
-                > *:not(:first-child) {
-                    margin-left: 5px;
-                }
-            }
-
-            &--inline {
-                .control {
-                    display: inline-flex;
-                }
-            }
-        }
 
         &__buttons {
-            margin-left: 20px;
+            margin-left: 80px;
         }
     }
 
-    .device-item {
-        $self: &;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        text-decoration: none;
-
-        &:not(:first-child) {
-            margin-left: 20px;
-        }
-
-        &__icon {
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #999999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-
-        &__label {
-            margin-top: 10px;
-            font-size: 12px;
-            color: inherit;
-        }
-
-        &--selected {
-            #{ $self }__icon {
-                background-color: #1a1a1a;
-            }
-        }
-    }
 
 </style>

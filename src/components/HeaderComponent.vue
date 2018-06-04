@@ -1,6 +1,8 @@
 <template>
     <header
         class="header">
+
+        <!-- Le logo -->
         <a
             href="http://www.lahautesociete.com"
             target="_blank"
@@ -10,12 +12,15 @@
                 alt="LHS"
                 width="60px">
         </a>
+
+        <!-- Le conteneur -->
         <div class="header__container">
+
+            <!-- Type de grille -->
             <div class="header__item">
                 <label
                     for="gridType"
                     class="label">Type de grille</label>
-
                 <select
                     id="gridType"
                     class="custom-select"
@@ -30,42 +35,7 @@
 
             </div>
 
-            <div class="header__item">
-                <label
-                    for="gutterWidth"
-                    class="label">Gouttières</label>
-                <div class="control">
-                    <input
-                        v-model.number="gutterWidth"
-                        id="gutterWidth"
-                        class="input"
-                        type="number"
-                        :step="gutterUnit === 'px' ? 1 : 0.1"
-                        min="0"
-                        max="400"><!--<span>px</span>-->
-                    <select
-                        id="gutterUnit"
-                        v-model="gutterUnit">
-                        <option
-                            value="px"
-                            selected>px</option>
-                        <option value="%">%</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <input
-                        type="number"
-                        class="form-control"
-                        v-model.number="gutterWidth"
-                        :step="gutterUnit === 'px' ? 1 : 0.1"
-                        min="0"
-                        max="400">
-                    <button-group-component/>
-                </div>
-                <button-group-component/>
-            </div>
-
+            <!-- Nombre de colonnes -->
             <div class="header__item">
                 <div class="form-group">
                     <label
@@ -81,6 +51,112 @@
                         max="30">
                 </div>
             </div>
+
+            <!-- Taille gouttières -->
+            <div class="header__item">
+                <label
+                    for="gutterWidth"
+                    class="label">Gouttières</label>
+                <div class="input-group">
+                    <input
+                        id="gutterWidth"
+                        type="number"
+                        class="form-control"
+                        v-model.number="gutterWidth"
+                        :step="gutterUnit === 'px' ? 1 : 0.1"
+                        min="0"
+                        max="400">
+                    <div class="input-group-append">
+                        <div class="btn-group btn-group-toggle">
+                            <label
+                                class="btn btn-secondary"
+                                :class="{ active: gutterUnit === 'px' } ">
+                                <input
+                                    v-model="gutterUnit"
+                                    type="radio"
+                                    name="gutterUnits"
+                                    value="px"
+                                    autocomplete="off">px
+                            </label>
+                            <label
+                                class="btn btn-secondary"
+                                :class="{ active: gutterUnit === '%' } ">
+                                <input
+                                    v-model="gutterUnit"
+                                    type="radio"
+                                    name="gutterUnits"
+                                    value="%"
+                                    autocomplete="off">%
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marges -->
+            <div class="header__item">
+                <!--<label
+                    for="margesWidth"
+                    class="label">Marges</label>
+                <div class="control">
+                    <input
+                        v-model.number="marginWidth"
+                        id="margesWidth"
+                        class="input"
+                        type="number"
+                        :step="marginUnit === 'px' ? 1 : 0.1"
+                        min="0"
+                        max="800">
+                    <select
+                        id="marginUnit"
+                        v-model="marginUnit">
+                        <option
+                            value="px"
+                            selected>px
+                        </option>
+                        <option value="%">%</option>
+                    </select>
+                </div>-->
+                <label
+                    for="margesWidth"
+                    class="label">Marges</label>
+                <div class="input-group">
+                    <input
+                        id="margesWidth"
+                        type="number"
+                        class="form-control"
+                        v-model.number="marginWidth"
+                        :step="marginUnit === 'px' ? 1 : 0.1"
+                        min="0"
+                        max="800">
+                    <div class="input-group-append">
+                        <div class="btn-group btn-group-toggle">
+                            <label
+                                class="btn btn-secondary"
+                                :class="{ active: marginUnit === 'px' } ">
+                                <input
+                                    v-model="marginUnit"
+                                    type="radio"
+                                    name="marginsUnits"
+                                    value="px"
+                                    autocomplete="off">px
+                            </label>
+                            <label
+                                class="btn btn-secondary"
+                                :class="{ active: marginUnit === '%' } ">
+                                <input
+                                    v-model="marginUnit"
+                                    type="radio"
+                                    name="marginsUnits"
+                                    value="%"
+                                    autocomplete="off">%
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Largeur max de la grille -->
             <div class="header__item">
                 <label
                     for="maxWidth"
@@ -98,30 +174,6 @@
                 </div>
             </div>
 
-
-            <div class="header__item">
-                <label
-                    for="margesWidth"
-                    class="label">Marges</label>
-                <div class="control">
-                    <input
-                        v-model.number="marginWidth"
-                        id="margesWidth"
-                        class="input"
-                        type="number"
-                        :step="marginUnit === 'px' ? 1 : 0.1"
-                        min="0"
-                        max="800"><!--<span>px</span>-->
-                    <select
-                        id="marginUnit"
-                        v-model="marginUnit">
-                        <option
-                            value="px"
-                            selected>px</option>
-                        <option value="%">%</option>
-                    </select>
-                </div>
-            </div>
             <div class="header__item header__item--inline">
                 <label
                     for="isFluid"
@@ -150,12 +202,9 @@
 </template>
 
 <script>
-import ButtonGroupComponent from '@/components/ButtonGroupComponent'
 export default {
     name: 'HeaderComponent',
-    components: {
-        ButtonGroupComponent
-    },
+    components: {},
 
     data() {
         return {}
@@ -200,7 +249,7 @@ export default {
                 return this.$store.getters.marginWidth;
             },
             set(value) {
-                this.$store.dispatch('setMarginWidth', value);
+                this.$store.dispatch('setMarginWidth', Number(value));
             }
         },
         marginUnit: {
@@ -260,7 +309,7 @@ export default {
         &__logo {
             //background-color: red;
             padding: 0 20px;
-           position: absolute;
+            position: absolute;
             top: 2rem;
             left: 2rem;
         }
@@ -279,8 +328,6 @@ export default {
             &:not(firstchild) {
                 margin-right: 20px;
             }
-
-
 
         }
     }
