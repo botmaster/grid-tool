@@ -1,6 +1,7 @@
 @import "../abstracts/bootstrap-vars";
 
 .btn-outline-secondary {
+    color: darken($secondary, 50%);
     &:hover, &:focus, &:not(:disabled):not(.disabled).active {
         background-color: white;
     }

@@ -9,7 +9,15 @@ const state = {
     marginUnit: 'px',
     gutterIsFluid: false,
     isFluid: false,
-    maxWidth: 1140
+    maxWidth: 1140,
+    gridType: 0,
+    typeList: [{
+        name: 'fixed',
+        label: 'Fixe'
+    }, {
+        name: 'fluid',
+        label: 'Fuilde'
+    }]
 }
 
 // getters
@@ -22,6 +30,8 @@ const getters = {
     isFluid: state => state.isFluid,
     maxWidth: state => state.maxWidth,
     gutterIsFluid: state => state.gutterIsFluid,
+    gridType: state => state.gridType,
+    gridTypeList: state => state.typeList
 }
 
 // actions
@@ -69,9 +79,7 @@ const actions = {
     },
 
     setMarginUnit(context, value) {
-
         // On converti la valeur en fonction de l'unité.
-
         switch (value) {
         case 'px':
             context.commit('setMarginUnit', value);
@@ -85,8 +93,6 @@ const actions = {
         default:
             console.error('setGutterUnit, value not valide');
         }
-
-
     },
 
     setIsFluid(context, value) {
@@ -112,6 +118,17 @@ const actions = {
         default:
             console.error('setGutterFluid, value not valide');
         }
+    },
+
+    setGridType (context, type) {
+        if(type === 0) {
+            im.setIsFluid(false);
+            context.commit('setIsFluid', false);
+        } else {
+            im.setIsFluid(true);
+            context.commit('setIsFluid', true);
+        }
+        context.commit('setGridType', type);
 
     }
 }
@@ -141,6 +158,9 @@ const mutations = {
     },
     setGutterFluid(state, value) {
         state.gutterIsFluid = Boolean(value);
+    },
+    setGridType(state, type) {
+        state.gridType = Number(type);
     }
 
 }

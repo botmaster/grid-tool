@@ -34,6 +34,13 @@ module.exports = {
             "closeBracket": 0,
             "alignAttributesVertically": true,
             "ignores": []
+        }],
+        "vue/max-attributes-per-line": [2, {
+            "singleline": 5,
+            "multiline": {
+                "max": 5,
+                "allowFirstLine": true
+            }
         }]
     }
 };

@@ -11,12 +11,13 @@
                     v-for="(item, index) in deviceList"
                     :key="index"
                     :class="{ 'active': currentDevice.name === item.name }"
-                    @click.prevent="changeDevice(item)">
-                    <span
-                        v-if="item.label && item.label !=='' ">{{ item.label }}</span>
+                    @click.prevent="changeDevice(item)"
+                    :title="item.label">
                     <span
                         v-if="item.icon"
                         class=""><i :class="item.icon"/></span>
+                    <span
+                        v-if="item.label && item.label !=='' ">{{ item.label }}</span>
                 </button>
             </div>
 
@@ -62,7 +63,7 @@ export default {
             let devices = this.$store.getters.getDevicescList;
             return devices.map(item => {
                 let obj = {...item};
-                obj.label = '';
+                obj.label = item.name;
                 return obj;
             });
         }

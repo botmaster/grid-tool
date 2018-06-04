@@ -18,18 +18,16 @@
 
             <!-- Type de grille -->
             <div class="header__item">
-                <label
-                    for="gridType"
-                    class="label">Type de grille</label>
+                <label for="gridType" class="label">Type de grille</label>
                 <select
                     id="gridType"
                     class="custom-select"
-                    @change="changeIframeSrc">
+                    @change="changeGridType">
                     <option
-                        v-for="option in iframeList"
-                        :key="option.value"
-                        :value="option.value">
-                        {{ option.text }}
+                        v-for="(option, index) in gridTypeList"
+                        :key="index"
+                        :value="option.name">
+                        {{ option.label }}
                     </option>
                 </select>
 
@@ -158,29 +156,6 @@
                 </div>
             </div>
 
-            <div class="header__item header__item--inline">
-                <label
-                    for="isFluid"
-                    class="label">Grille fluide</label>
-                <div class="control">
-                    <input
-                        v-model="isFluid"
-                        id="isFluid"
-                        type="checkbox"
-                        class="checkbox">
-                </div>
-                <br>
-                <label
-                    for="isGutterFluid"
-                    class="label">Gouttières Fluides</label>
-                <div class="control">
-                    <input
-                        v-model="isGutterFluid"
-                        id="isGutterFluid"
-                        type="checkbox"
-                        class="checkbox">
-                </div>
-            </div>
         </div>
     </header>
 </template>
@@ -194,11 +169,8 @@ export default {
         return {}
     },
     methods: {
-        changeIframeSrc(e) {
-            this.$store.dispatch('setCurrentIframeSrc', {
-                value: e.target.value,
-                text: e.target.options[e.target.selectedIndex].text
-            });
+        changeGridType(e) {
+            this.$store.dispatch('setGridType', e.target.options[e.target.selectedIndex].index);
         }
     },
 
@@ -244,22 +216,7 @@ export default {
                 this.$store.dispatch('setMarginUnit', value);
             }
         },
-        isFluid: {
-            get() {
-                return this.$store.getters.isFluid;
-            },
-            set(value) {
-                this.$store.dispatch('setIsFluid', value);
-            }
-        },
-        isGutterFluid: {
-            get() {
-                return this.$store.getters.gutterIsFluid;
-            },
-            set(value) {
-                this.$store.dispatch('setGutterFluid', value);
-            }
-        },
+
         maxWidth: {
             get() {
                 return this.$store.getters.maxWidth;
@@ -268,17 +225,11 @@ export default {
                 this.$store.dispatch('setMaxWidth', value);
             }
         },
-        iframeList() {
-            return this.$store.getters.getIframeSrcList;
-        },
-        selectedIframeSrc() {
-            return this.$store.getters.getCurrentIframeSrc;
+        gridTypeList() {
+            return this.$store.getters.gridTypeList;
         }
 
 
-    },
-    created() {
-        //this.$store.commit('setColCount', 12)
     }
 }
 </script>
