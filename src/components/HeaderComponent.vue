@@ -8,9 +8,9 @@
             target="_blank"
             class="header__logo">
             <img
-                src="@/assets/lhs-logo.svg"
+                src="@/assets/logo-lhs.png"
                 alt="LHS"
-                width="60px">
+                width="42">
         </a>
 
         <!-- Le conteneur -->

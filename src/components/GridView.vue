@@ -19,7 +19,7 @@
                         :key="index"
                         class="g-col"
                         :style="{ flex: '0 0 ' + colWidth, paddingLeft: padding, paddingRight: padding}">
-                        {{ i }}
+                        <!--{{ i }}-->
                     </div>
                 </div>
             </div>
