@@ -92,7 +92,7 @@ export default {
         &__container {
             max-width: 1140px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 0 70px;
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
