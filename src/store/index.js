@@ -1,8 +1,7 @@
-
-import Vue from 'vue'
-import Vuex from 'vuex'
-import gridModule from './modules/grid-store'
-import appdModule from './modules/app-store'
+import Vue from "vue";
+import Vuex from "vuex";
+import gridModule from "./modules/grid-store";
+import appdModule from "./modules/app-store";
 
 Vue.use(Vuex);
 
@@ -16,5 +15,4 @@ export default new Vuex.Store({
         gridModule
     },
     strict: debug
-})
-
+});
