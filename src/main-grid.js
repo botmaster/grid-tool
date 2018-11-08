@@ -5,13 +5,10 @@ import './styles/main.scss'
 import Vue from 'vue'
 import Grid from './components/GridView'
 import dom2image from 'dom-to-image';
-//import Vuex from 'vuex'
-//import store from './store'
 
 Vue.config.productionTip = false;
-//Vue.use(Vuex);
 
-const EventBus = new Vue()
+const EventBus = new Vue();
 Object.defineProperties(Vue.prototype, {
     $bus: {
         get: function() {

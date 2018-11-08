@@ -37,7 +37,7 @@ const state = {
         }
     ],
     currentDevice: 'custom'
-}
+};
 
 // getters
 const getters = {

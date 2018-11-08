@@ -9,18 +9,13 @@
             id="snap"
             :style="{maxWidth: isFluid ? 'none' : (containerWidth + 'px')}">
             <div
-                class="g-container"
-                ref="containerCustom"
-                :style="{ maxWidth: isFluid ? 'none' : (containerWidth + 'px'), paddingLeft: margin, paddingRight: margin }">
-
-                <div class="g-row">
-                    <div
-                        v-for="(i, index) in Number(columnsNum)"
-                        :key="index"
-                        class="g-col"
-                        :style="{ flex: '0 0 ' + colWidth, paddingLeft: padding, paddingRight: padding}">
-                        <!--{{ i }}-->
-                    </div>
+                :style="{'grid-column-gap': gutterGap, 'margin-left':margin, 'margin-right': margin}"
+                class="grid-layout"
+                style="display: grid; grid-template-columns: repeat(12, 1fr); height: 100%">
+                <div
+                    v-for="(i, index) in Number(columnsNum)"
+                    :key="index">
+                    {{ i }}
                 </div>
             </div>
 
@@ -60,18 +55,18 @@ export default {
             let colWidth = this.containerWidth / this.columnsNum;
             return colWidth / this.containerWidth * 100 + '%';
         },
-        padding: function () {
+        margin: function () {
+            return this.marginWidth + this.marginUnit;
+        },
+        gutterGap() {
             if(this.gutterUnit === '%') {
-                return this.gutterWidth / 2 + this.gutterUnit;
+                return `${this.gutterWidth}%`;
             } else if (this.gutterUnit === 'px') {
-                return this.gutterWidth / 2 + this.gutterUnit;
+                return `${this.gutterWidth}px`;
             }
             else {
                 console.error('Impossible d\'interpréter l\'ulinté');
             }
-        },
-        margin: function () {
-            return this.marginWidth + this.marginUnit;
         }
     },
     created() {
@@ -118,6 +113,15 @@ export default {
         background-color: #8e97a0;
     }
 
+    .grid-layout {
+        background-color: $white;
+        text-align: center;
+
+        > div {
+            background-color: $color-pink;
+        }
+    }
+
     .grid-view {
         height: 100%;
         font-size: 10px;
@@ -127,65 +131,10 @@ export default {
         flex-direction: column;
 
         .snap {
-            height: 100%;
-            width: 100%;
             flex: 0 0 auto;
-        }
-
-        .g-container {
             height: 100%;
-            margin: 0 auto;
-            padding: 0;
-            background-color: $color-lime;
-        }
-
-        .g-row {
-            position: relative;
-            height: 100%;
-            background-color: $white;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            margin: 0;
-            text-align: center;
-        }
-
-        .g-col {
-            position: relative;
             width: 100%;
-            min-height: 1px;
-            //background-image: linear-gradient(#00ffff42);
-            background-color: $color-pink;
-            background-clip: content-box;
-            //height: 400px;
-            align-items: stretch;
-
-        }
-
-        /*.high-light-container {
-            background-color: red;
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
-        .high-light-row {
-            background-color: #eeeeee;
-        }
-        .high-light-col {
-            background-image: linear-gradient(#f7dddd);
-            background-clip: content-box;
-        }*/
-
-        .dom-wrap {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            //align-items: center;
-
-            > * {
-                flex: 0 0 100%;
-                width: 100%;
-            }
+            background-color: $color-lime;
         }
     }
 </style>

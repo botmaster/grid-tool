@@ -13,12 +13,12 @@ const state = {
     gridType: 0,
     typeList: [{
         name: 'fixed',
-        label: 'Fixe'
+        label: 'Largeur fixe'
     }, {
         name: 'fluid',
         label: 'Fuilde'
     }]
-}
+};
 
 // getters
 const getters = {
@@ -32,7 +32,7 @@ const getters = {
     gutterIsFluid: state => state.gutterIsFluid,
     gridType: state => state.gridType,
     gridTypeList: state => state.typeList
-}
+};
 
 // actions
 const actions = {
@@ -131,7 +131,7 @@ const actions = {
         context.commit('setGridType', type);
 
     }
-}
+};
 
 // mutations
 const mutations = {
@@ -163,7 +163,7 @@ const mutations = {
         state.gridType = Number(type);
     }
 
-}
+};
 
 export default {
     state,
