@@ -9,9 +9,9 @@
             id="snap"
             :style="{maxWidth: isFluid ? 'none' : (containerWidth + 'px')}">
             <div
-                :style="{'grid-column-gap': gutterGap, 'margin-left':margin, 'margin-right': margin}"
+                :style="{'grid-column-gap': gutterGap, 'margin-left':margin, 'margin-right': margin, 'grid-template-columns': `repeat(${columnsNum}, 1fr)`}"
                 class="grid-layout"
-                style="display: grid; grid-template-columns: repeat(12, 1fr); height: 100%">
+                style="display: grid; height: 100%">
                 <div
                     v-for="(i, index) in Number(columnsNum)"
                     :key="index">
