@@ -1,6 +1,6 @@
 {
-  "name": "test-vue-cli-3-gridtool",
-  "version": "0.1.0",
+  "name": "LHS-gridtool",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
