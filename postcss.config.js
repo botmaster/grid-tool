@@ -1,5 +1,12 @@
+const purgecss = require("@fullhuman/postcss-purgecss");
+
 module.exports = {
-    plugins: {
-        autoprefixer: {}
-    }
+    plugins: [
+        // ...
+        require("autoprefixer"),
+        purgecss({
+            content: ["./src/**/*.html", "./src/**/*.vue"]
+        })
+        // ...
+    ]
 };
