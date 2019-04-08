@@ -17,7 +17,6 @@ module.exports = {
             chunks: ["chunk-vendors", "chunk-common", "grid"]
         }
     },
-
     baseUrl: "",
     outputDir: undefined,
     assetsDir: undefined,
